@@ -16,8 +16,7 @@ func main() {
 	//util.AddUser(user)
 
 	//用户登录
-	models.LoginUser()
-
+	//models.LoginUser()
 
 	//操作article表
 
