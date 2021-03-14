@@ -3,13 +3,22 @@ package main
 import (
 	"dbPractise/models"
 	"dbPractise/setting"
-	"dbPractise/util"
-	"log"
 )
 
 func main() {
 	setting.Setup()
 	models.Setup()
+
+	// 操作User表
+
+	//用户注册
+	//user := models.RegisterUser()
+	//util.AddUser(user)
+
+	//用户登录
+	models.LoginUser()
+
+	//操作article表
 
 	// Add
 	//article := map[string]interface{}{
@@ -45,6 +54,6 @@ func main() {
 	//util.CleanArticles()
 
 	// Exist
-	exist := util.ExistArticleByID(25)
-	log.Println(exist)
+	//exist := util.ExistArticleByID(25)
+	//log.Println(exist)
 }
