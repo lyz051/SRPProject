@@ -22,7 +22,7 @@ func TestAny(t *testing.T) {
 		"voltage":         float32(220),
 		"add_user":        "lyz",
 		//"add_time":			timenow,
-		"delete": 0,
+		//"delete": 0,
 	}
 
 	powerplant := db_m8.PowerPlant{
@@ -34,7 +34,7 @@ func TestAny(t *testing.T) {
 		Voltage:        pp["voltage"].(float32),
 		AddUser:        pp["add_user"].(string),
 		//AddTime: 		pp["add_time"].(string),
-		Delete: pp["delete"].(int),
+		//Delete: pp["delete"].(int),
 	}
 	if err := db_m8.AddPowerPlant(powerplant); err != nil {
 		log.Println(err.Error())
