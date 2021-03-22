@@ -16,7 +16,10 @@ import (
 	"log"
 )
 
-var db *gorm.DB
+var (
+	M8   *gorm.DB
+	STOB *gorm.DB
+)
 var pageSize int
 
 // Setup initializes the database instance
@@ -25,12 +28,20 @@ func Setup() {
 
 	pageSize = setting.DatabaseSetting.PageSize
 
-	// driver: "gorm.io/driver/mysql"
-	db, err = gorm.Open(mysql.Open(fmt.Sprintf("%s:%s@tcp(%s)/%s?charset=utf8&parseTime=True&loc=Local",
-		setting.DatabaseSetting.User,
-		setting.DatabaseSetting.Password,
-		setting.DatabaseSetting.Host,
-		setting.DatabaseSetting.Name)), &gorm.Config{
+	M8, err = open(setting.DatabaseSetting.User, setting.DatabaseSetting.Password,
+		setting.DatabaseSetting.Host, setting.DBNamesSetting.M8)
+	STOB, err = open(setting.DatabaseSetting.User, setting.DatabaseSetting.Password,
+		setting.DatabaseSetting.Host, setting.DBNamesSetting.ScadaBpa)
+
+	if err != nil {
+		log.Fatalf("models.Setup err: %v", err)
+	}
+}
+
+// driver: "gorm.io/driver/mysql"
+func open(user, password, host, name string) (*gorm.DB, error) {
+	db, err := gorm.Open(mysql.Open(fmt.Sprintf("%s:%s@tcp(%s)/%s?charset=utf8&parseTime=True&loc=Local",
+		user, password, host, name)), &gorm.Config{
 		NamingStrategy: schema.NamingStrategy{
 			TablePrefix:   setting.DatabaseSetting.TablePrefix, // table name prefix, table for `User` would be `t_users`
 			SingularTable: true,                                // use singular table name, table for `User` would be `user` with this option enabled
@@ -48,10 +59,7 @@ func Setup() {
 		//	return time.Now()
 		//},
 	})
-
-	if err != nil {
-		log.Fatalf("models.Setup err: %v", err)
-	}
+	return db, err
 }
 
 func updateTimeStampForCreateCallback(db *gorm.DB) {

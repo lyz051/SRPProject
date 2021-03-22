@@ -1,13 +1,14 @@
-package db_m8
+package main
 
 import (
 	"dbPractise/models"
+	"dbPractise/models/db_m8"
 	"dbPractise/setting"
 	"log"
 	"testing"
 )
 
-func TestAddPowerPlant(t *testing.T) {
+func TestAny(t *testing.T) {
 	setting.Setup()
 	models.Setup()
 
@@ -24,7 +25,7 @@ func TestAddPowerPlant(t *testing.T) {
 		"delete": 0,
 	}
 
-	powerplant := PowerPlant{
+	powerplant := db_m8.PowerPlant{
 		Name:           pp["name"].(string),
 		CName:          pp["c_name"].(string),
 		Type:           pp["type"].(string),
@@ -35,8 +36,7 @@ func TestAddPowerPlant(t *testing.T) {
 		//AddTime: 		pp["add_time"].(string),
 		Delete: pp["delete"].(int),
 	}
-	if err := AddPowerPlant(powerplant); err != nil {
+	if err := db_m8.AddPowerPlant(powerplant); err != nil {
 		log.Println(err.Error())
 	}
-
 }

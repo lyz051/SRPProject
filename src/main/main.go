@@ -4,8 +4,6 @@ import (
 	"dbPractise/models"
 	"dbPractise/pkg/logging"
 	"dbPractise/setting"
-	"dbPractise/util"
-	"log"
 )
 
 func main() {
@@ -35,8 +33,8 @@ func main() {
 	//util.DeleteArticle(26)
 
 	//Get
-	article := util.GetArticle(4)
-	log.Println("\t[GET]:\t", article.ID, "\t", article.CreatedAt)
+	//article := util.GetArticle(20)
+	//log.Println("\t[GET]:\t", article.ID, "\t", article.CreatedAt)
 
 	//Get all
 	//articles := util.GetArticles(1)

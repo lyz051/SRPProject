@@ -23,7 +23,7 @@ type PowerPlant struct {
 //根据ID在现有power_plant表单中检索是否存在
 func ExistPowerPlantByID(id int) (bool, error) {
 	var powerplant PowerPlant
-	err := models.Db.Select("id").Where("id = ?", id).First(&powerplant).Error
+	err := models.M8.Select("id").Where("id = ?", id).First(&powerplant).Error
 	if err != nil && err != gorm.ErrRecordNotFound {
 		return false, err
 	}
@@ -37,7 +37,7 @@ func ExistPowerPlantByID(id int) (bool, error) {
 
 //添加power_plant
 func AddPowerPlant(powerplant PowerPlant) error {
-	if err := models.Db.Create(&powerplant).Error; err != nil {
+	if err := models.M8.Create(&powerplant).Error; err != nil {
 		return err
 	}
 	return nil
@@ -45,7 +45,7 @@ func AddPowerPlant(powerplant PowerPlant) error {
 
 //根据厂站英文名在power_plant表单中修改元素
 func EditPowerPlantByName(name string, data interface{}) error {
-	if err := models.Db.Model(&PowerPlant{}).Where("name = ?", name).Updates(data).Error; err != nil {
+	if err := models.M8.Model(&PowerPlant{}).Where("name = ?", name).Updates(data).Error; err != nil {
 		return err
 	}
 	return nil
@@ -54,7 +54,7 @@ func EditPowerPlantByName(name string, data interface{}) error {
 //根据ID检索该厂站信息
 func GetPowerPlantByID(id int) (*PowerPlant, error) {
 	var powerplant PowerPlant
-	err := models.Db.Where("id = ?", id).First(&powerplant).Error
+	err := models.M8.Where("id = ?", id).First(&powerplant).Error
 	if err != nil && err != gorm.ErrRecordNotFound {
 		return nil, err
 	}
@@ -64,7 +64,7 @@ func GetPowerPlantByID(id int) (*PowerPlant, error) {
 //根据英文名检索该厂站信息
 func GetPowerPlantByName(name string) (*PowerPlant, error) {
 	var powerplant PowerPlant
-	err := models.Db.Where("name = ?", name).First(&powerplant).Error
+	err := models.M8.Where("name = ?", name).First(&powerplant).Error
 	if err != nil && err != gorm.ErrRecordNotFound {
 		return nil, err
 	}
@@ -74,7 +74,7 @@ func GetPowerPlantByName(name string) (*PowerPlant, error) {
 //根据电压等级检索所有负荷条件厂站
 func GetAllPowerPlantByVoltage(voltage float32) ([]*PowerPlant, error) {
 	var powerplant []PowerPlant
-	err := models.Db.Where("voltage = ?", voltage).Find(&powerplant).Error
+	err := models.M8.Where("voltage = ?", voltage).Find(&powerplant).Error
 	if err != nil && err != gorm.ErrRecordNotFound {
 		return nil, err
 	}
