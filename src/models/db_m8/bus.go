@@ -16,12 +16,12 @@ import (
 //	Delete               int       `json:"delete"`                         //删除标志位
 //}
 
-func AddBus(bus Bus) error {
-	if err := models.M8.Create(&bus).Error; err != nil {
-		return err
-	}
-	return nil
-}
+//func AddBus(bus Bus) error {
+//	if err := models.M8.Create(&bus).Error; err != nil {
+//		return err
+//	}
+//	return nil
+//}
 
 func EditBusByName(name string, data interface{}) error {
 	if err := models.M8.Model(&Bus{}).Where("name = ?", name).Updates(data).Error; err != nil {
