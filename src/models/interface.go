@@ -1,16 +1,16 @@
 package models
 
 type Exist interface {
-	existByID(int, ...interface{}) error
-	existByName(string, ...interface{}) error
+	ExistByID(int, ...interface{}) error
+	ExistByName(string, ...interface{}) error
 }
 
 type Add interface {
-	add(map[string]interface{}) error
+	Add(map[string]interface{}) error
 }
 
 type Update interface {
-	update(int, interface{}) error
+	Update(int, interface{}) error
 }
 
 type Get interface {
