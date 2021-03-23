@@ -2,8 +2,63 @@ package db_m8
 
 import "dbPractise/models"
 
+//添加函数，可判断是否已在数据库表单中存在
 func (a *PowerPlant) AddData() {
 	flag, _ := ExistPowerPlantByName(a.Name)
+	if flag == true {
+		return
+	} else {
+		a.Add()
+	}
+}
+
+func (a *Bus) AddData() {
+	flag, _ := ExistBusByName(a.Name)
+	if flag == true {
+		return
+	} else {
+		a.Add()
+	}
+}
+
+func (a *ACLine) AddData() {
+	flag, _ := ExistACLineByName(a.Name)
+	if flag == true {
+		return
+	} else {
+		a.Add()
+	}
+}
+
+func (a *DCLine) AddData() {
+	flag, _ := ExistDCLineByName(a.Name)
+	if flag == true {
+		return
+	} else {
+		a.Add()
+	}
+}
+
+func (a *DCSystem) AddData() {
+	flag, _ := ExistDCSystemByName(a.Name)
+	if flag == true {
+		return
+	} else {
+		a.Add()
+	}
+}
+
+func (a *Conventor) AddData() {
+	flag, _ := ExistConventorByName(a.Name)
+	if flag == true {
+		return
+	} else {
+		a.Add()
+	}
+}
+
+func (a *Trans) AddData() {
+	flag, _ := ExistTransByName(a.Name)
 	if flag == true {
 		return
 	} else {

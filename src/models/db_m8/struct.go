@@ -72,7 +72,7 @@ type DCLine struct {
 	NBBus       string    `json:"nb_bus"`                         //逆变侧母线名
 	NBVolt      float32   `json:"nb_volt"`                        //逆变侧基电压
 	ParameterID int       `json:"parameter_id"`                   //当前使用的参数ID
-	DCSys       int       `json:"dc_sys"`                         //所属直流系统
+	DCSys       string    `json:"dc_sys"`                         //所属直流系统
 }
 
 type Conventor struct {
