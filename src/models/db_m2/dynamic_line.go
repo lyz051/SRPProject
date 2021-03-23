@@ -4,12 +4,12 @@ import "dbPractise/models"
 
 type DynamicLine struct {
 	M2
-	LineName string `gorm:"column:linename"`
+	LineName string `gorm:"column:linename;index"`
 	Type     int    `json:"type"`
-	StIDA    int    `gorm:"column:stid_a"`
-	StIDB    int    `gorm:"column:stid_b"`
-	BusIDA   int    `gorm:"column:bus_id_a"`
-	BusIDB   int    `gorm:"column:bus_id_b"`
+	StIDA    int    `gorm:"column:stid_a;index"`
+	StIDB    int    `gorm:"column:stid_b;index"`
+	BusIDA   int    `gorm:"column:bus_id_a;index"`
+	BusIDB   int    `gorm:"column:bus_id_b;index"`
 }
 
 func (dl *DynamicLine) Add() error {
