@@ -2,9 +2,7 @@ package main
 
 import (
 	"dbPractise/models"
-	"dbPractise/models/db_m9"
 	"dbPractise/setting"
-	"log"
 	"testing"
 )
 
@@ -47,12 +45,13 @@ func TestAny(t *testing.T) {
 	//dl.ID=1
 	//dl.LineName="test"
 	//dl.Add()
+
 	// 1. Add ac_branch
-	db_m9.Setup()
-	var acb db_m9.ACBranch
-	acb.LineID = 1
+	//db_m9.Setup()
+	//var acb db_m9.ACBranch
+	//acb.LineID = 1
 	//acb.Add()
 	// 2. Association
-	dynamicLine, _ := acb.GetDyanmicLine()
-	log.Println(dynamicLine)
+	//	dynamicLine, _ := acb.GetDyanmicLine()
+	//	log.Println(dynamicLine)
 }
