@@ -3,22 +3,21 @@ package db_m8
 import (
 	"dbPractise/models"
 	"gorm.io/gorm"
-	"time"
 )
 
-type PowerPlant struct {
-	ID             int     `json:"id" gorm:"primarykey"` //厂站ID
-	Name           string  `json:"name"`                 //厂站英文名
-	CName          string  `json:"c_name"`               //厂站中文名
-	Type           string  `json:"type"`                 //卡片类型
-	BelongProvince string  `json:"blong_province"`       //所属省网
-	BelongCity     string  `json:"blong_city"`           //所属地市
-	Voltage        float32 `json:"voltage"`              //电压等级
-	AddUser        string  `json:"add_user"`             //添加数据的用户
-	//AddTime			string		`json:"add_time"`
-	AddTime time.Time `json:"add_time" gorm:"autoUpdateTime"` //添加时间
-	Delete  int       `json:"delete"`                         //删除标志位
-}
+//type PowerPlant struct {
+//	ID             int     `json:"id" gorm:"primarykey"` //厂站ID
+//	Name           string  `json:"name"`                 //厂站英文名
+//	CName          string  `json:"c_name"`               //厂站中文名
+//	Type           string  `json:"type"`                 //卡片类型
+//	BelongProvince string  `json:"blong_province"`       //所属省网
+//	BelongCity     string  `json:"blong_city"`           //所属地市
+//	Voltage        float32 `json:"voltage"`              //电压等级
+//	AddUser        string  `json:"add_user"`             //添加数据的用户
+//	//AddTime			string		`json:"add_time"`
+//	AddTime time.Time `json:"add_time" gorm:"autoUpdateTime"` //添加时间
+//	Delete  int       `json:"delete"`                         //删除标志位
+//}
 
 //根据ID在现有power_plant表单中检索是否存在
 func ExistPowerPlantByID(id int) (bool, error) {
