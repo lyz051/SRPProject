@@ -4,7 +4,6 @@ import (
 	"dbPractise/models"
 	"dbPractise/models/db_m9"
 	"dbPractise/setting"
-	"log"
 	"testing"
 )
 
@@ -80,19 +79,20 @@ func TestM9(t *testing.T) {
 	//db_m9.Update(trans,data2)
 
 	//Get
-	id := 6
-	//exist,err:=db_m9.ExistByID("ac_branch", id)
-	exist, err := db_m9.ExistACBranchByID(id)
-	if exist && err == nil {
-		//acb,err:=db_m9.GetByID("ac_branch",id)
-		acb, err := db_m9.GetACBranchByID(id)
-		if err != nil {
-			log.Println(err)
-		}
-		log.Printf("%#v", acb)
-	}
+	//id := 6
+	////exist,err:=db_m9.ExistByID("ac_branch", id)
+	//exist, err := db_m9.ExistACBranchByID(id)
+	//if exist && err == nil {
+	//	//acb,err:=db_m9.GetByID("ac_branch",id)
+	//	acb, err := db_m9.GetACBranchByID(id)
+	//	if err != nil {
+	//		log.Println(err)
+	//	}
+	//	log.Printf("%#v", acb)
+	//}
 
-	// Delete
-	//acb.ID = 3
+	//Delete
+	acb.ID = 3
 	//db_m9.Delete(acb)
+	db_m9.DeleteACBranchByID(acb.ID)
 }

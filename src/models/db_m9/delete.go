@@ -36,3 +36,14 @@ func Delete(ins interface{}) error {
 	}
 	return nil
 }
+
+func DeleteACBranchByID(id int) error {
+	err := models.M9.Model(&ACBranch{}).Where("id = ?", id).Updates(
+		map[string]interface{}{
+			"delete": 1,
+		}).Error
+	if err != nil {
+		return err
+	}
+	return nil
+}
