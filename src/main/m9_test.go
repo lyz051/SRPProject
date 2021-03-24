@@ -92,7 +92,7 @@ func TestM9(t *testing.T) {
 	//}
 
 	//Delete
-	acb.ID = 3
+	acb.ID = 7
 	//db_m9.Delete(acb)
 	db_m9.DeleteACBranchByID(acb.ID)
 }

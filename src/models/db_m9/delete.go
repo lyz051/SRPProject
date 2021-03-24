@@ -38,12 +38,16 @@ func Delete(ins interface{}) error {
 }
 
 func DeleteACBranchByID(id int) error {
-	err := models.M9.Model(&ACBranch{}).Where("id = ?", id).Updates(
-		map[string]interface{}{
+	exist, err := ExistACBranchByID(id)
+	if exist && err == nil {
+		var acb ACBranch
+		acb.ID = id
+		if err = Update(acb, map[string]interface{}{
 			"delete": 1,
-		}).Error
-	if err != nil {
-		return err
+		}); err != nil {
+			return err
+		}
+		return nil
 	}
-	return nil
+	return err
 }
