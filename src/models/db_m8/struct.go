@@ -26,6 +26,10 @@ type PowerPlant struct {
 	Voltage        float32   `json:"voltage"`                        //电压等级
 }
 
+func (this *PowerPlant) TableName() string {
+	return "power_plant"
+}
+
 type Bus struct {
 	ID                   int       `json:"id" gorm:"primarykey"`           //厂站ID
 	Name                 string    `json:"name"`                           //英文名
@@ -59,6 +63,10 @@ type ACLine struct {
 	StartMonth   int       `json:"start_month"`                    //投运月
 }
 
+func (this *ACLine) TableName() string {
+	return "ac_line"
+}
+
 type DCLine struct {
 	ID          int       `json:"id" gorm:"primarykey"`           //厂站ID
 	Name        string    `json:"name"`                           //英文名
@@ -75,6 +83,10 @@ type DCLine struct {
 	DCSys       string    `json:"dc_sys"`                         //所属直流系统
 }
 
+func (this *DCLine) TableName() string {
+	return "dc_line"
+}
+
 type Conventor struct {
 	ID      int       `json:"id" gorm:"primarykey"`           //厂站ID
 	Name    string    `json:"name"`                           //英文名
@@ -87,7 +99,7 @@ type Conventor struct {
 	BusV1   float32   `json:"bus_v_1"`                        //换流器母线电压
 	Bus2    string    `json:"bus_2"`                          //换流变一次侧母线名
 	BusV2   float32   `json:"bus_v_2"`                        //换流变一次侧基电压
-	DCSys   int       `json:"dc_sys"`                         //所属直流系统
+	DCSys   string    `json:"dc_sys"`                         //所属直流系统
 }
 
 type DCSystem struct {
@@ -102,6 +114,10 @@ type DCSystem struct {
 	Statue  int       `json:"statue"`                         //状态
 	TimeIn  string    `json:"time_in"`                        //投产日期
 	TimeOut string    `json:"time_out"`                       //退役日期
+}
+
+func (this *DCSystem) TableName() string {
+	return "dc_system"
 }
 
 type Trans struct {
