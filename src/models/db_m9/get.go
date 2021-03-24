@@ -34,7 +34,7 @@ func ExistByID(table string, id int) (bool, error) {
 	//err := models.M9.Table(table).Where("id = ?", id).Take(&res).Error
 	err := models.M9.Table(table).First(&res, "id = ?", id).Error
 	//err:=models.M9.Raw("SELECT id, type FROM "+table+" WHERE id = ?", id).Scan(&res).Error
-	if err != nil && err != gorm.ErrRecordNotFound {
+	if err != nil || err != gorm.ErrRecordNotFound {
 		return false, err
 	}
 
@@ -43,15 +43,6 @@ func ExistByID(table string, id int) (bool, error) {
 	}
 
 	return false, nil
-}
-
-func GetACBranchByID(id int) (*ACBranch, error) {
-	var acb ACBranch
-	err := models.M8.Where("id = ? and delete != 1", id).First(&acb).Error
-	if err != nil && err != gorm.ErrRecordNotFound {
-		return nil, err
-	}
-	return &acb, nil
 }
 
 func GetByID(table string, id int) (interface{}, error) {
@@ -68,8 +59,32 @@ func GetByID(table string, id int) (interface{}, error) {
 	}
 
 	err := models.M8.Where("id = ? and delete != 1", id).First(&tableStruct).Error
-	if err != nil && err != gorm.ErrRecordNotFound {
+	if err != nil || err != gorm.ErrRecordNotFound {
 		return nil, err
 	}
 	return tableStruct, nil
+}
+
+func ExistACBranchByID(id int) (bool, error) {
+	var acb ACBranch
+	err := models.M9.Model(&ACBranch{}).Where("id = ?", id).First(&acb).Error
+	//err:=models.M9.Raw("SELECT id, type FROM "+table+" WHERE id = ?", id).Scan(&res).Error
+	if err != nil && err != gorm.ErrRecordNotFound {
+		return false, err
+	}
+
+	if acb.ID > 0 {
+		return true, nil
+	}
+
+	return false, nil
+}
+
+func GetACBranchByID(id int) (*ACBranch, error) {
+	var acb ACBranch
+	err := models.M9.Model(&ACBranch{}).Where("id = ? and `delete` != 1", id).First(&acb).Error
+	if err != nil && err != gorm.ErrRecordNotFound {
+		return nil, err
+	}
+	return &acb, nil
 }
