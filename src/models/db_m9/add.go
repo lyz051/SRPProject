@@ -48,3 +48,7 @@ func Add(ins interface{}) error {
 	}
 	return nil
 }
+
+//func Add(ins interface{}) int {
+//
+//}

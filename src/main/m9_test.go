@@ -58,8 +58,8 @@ func TestM9(t *testing.T) {
 	// M9 反射测试
 	var acb db_m9.ACBranch
 	var trans db_m9.Transformer
-	acb.LineID = 3
-	trans.TransID = 3
+	acb.LineName = "testLine"
+	trans.TransName = "testTrans"
 	trans.AddUser = "lzt"
 
 	// Add
@@ -92,7 +92,7 @@ func TestM9(t *testing.T) {
 	//}
 
 	//Delete
-	acb.ID = 7
-	//db_m9.Delete(acb)
-	db_m9.DeleteACBranchByID(acb.ID)
+	//acb.ID = 7
+	////db_m9.Delete(acb)
+	//db_m9.DeleteACBranchByID(acb.ID)
 }

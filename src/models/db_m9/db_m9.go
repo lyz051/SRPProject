@@ -17,7 +17,7 @@ type M9 struct {
 type ACBranch struct {
 	M9
 
-	LineID int `gorm:"index"`
+	LineName string `gorm:"index"`
 	//DynamicLine db_m2.DynamicLine `json:"dynamic_line"`
 	R           float32 `json:"r"`
 	RPU         float32 `json:"rpu"`
@@ -39,23 +39,23 @@ func (this *ACBranch) TableName() string {
 type Transformer struct {
 	M9
 
-	TransID int     `gorm:"index"`
-	CDBZ    float32 `gorm:"column:cdbz"`   // 区域联络线测点标志
-	FDCLDH  float32 `gorm:"column:fdcldh"` // 分段串联短号
-	S       float32 // 额定容量
-	BLBSM   int     `gorm:"column:blbsm"` // 并联变数目
-	RT      float32 `gorm:"column:r_t"`   // 铜损等效电阻
-	X       float32 // 漏抗
-	Tg      float32 `gorm:"column:tg"`   // 铁损等效电导
-	Jg      float32 `gorm:"column:jg"`   // 激磁导纳
-	FJT1    float32 `gorm:"column:fjt1"` // 节点1固定分接头
-	FJT2    float32 `gorm:"column:fjt2"` // 节点2固定分接头
+	TransName string  `gorm:"index"`
+	CDBZ      float32 `gorm:"column:cdbz"`   // 区域联络线测点标志
+	FDCLDH    float32 `gorm:"column:fdcldh"` // 分段串联短号
+	S         float32 // 额定容量
+	BLBSM     int     `gorm:"column:blbsm"` // 并联变数目
+	RT        float32 `gorm:"column:r_t"`   // 铜损等效电阻
+	X         float32 // 漏抗
+	Tg        float32 `gorm:"column:tg"`   // 铁损等效电导
+	Jg        float32 `gorm:"column:jg"`   // 激磁导纳
+	FJT1      float32 `gorm:"column:fjt1"` // 节点1固定分接头
+	FJT2      float32 `gorm:"column:fjt2"` // 节点2固定分接头
 }
 
 type DCBranch struct {
 	M9
 
-	LineID   int     `gorm:"index"`
+	LineName string  `gorm:"index"`
 	CDBZ     float32 `gorm:"column:cdbz"` // 区域联络线测点标志
 	IBase    float32 // 直流线路额定电流
 	R        float32 // 直流线路电阻
@@ -76,12 +76,12 @@ func (this *DCBranch) TableName() string {
 type Convertor struct {
 	M9
 
-	TransID string  `gorm:"index"`
-	FQM     float32 `gorm:"column:fqm"`    // 分区名
-	ZLXQS   float32 `gorm:"column:zlxqs"`  // 整流线桥数
-	PBDKDG  float32 `gorm:"column:pbdkdg"` // 平波电抗电感
-	ZXCFJ   float32 `gorm:"column:zxcfj"`  // 最小触发角
-	ZDCFJ   float32 `gorm:"column:zdcfj"`  // 最大触发角
-	MGQFDYJ float32 `gorm:"mgqfdyj"`       // 每个桥阀电压降
-	QDLEDZ  float32 `gorm:"qdledz"`        // 桥电流额定值
+	TransName string  `gorm:"index"`
+	FQM       float32 `gorm:"column:fqm"`    // 分区名
+	ZLXQS     float32 `gorm:"column:zlxqs"`  // 整流线桥数
+	PBDKDG    float32 `gorm:"column:pbdkdg"` // 平波电抗电感
+	ZXCFJ     float32 `gorm:"column:zxcfj"`  // 最小触发角
+	ZDCFJ     float32 `gorm:"column:zdcfj"`  // 最大触发角
+	MGQFDYJ   float32 `gorm:"mgqfdyj"`       // 每个桥阀电压降
+	QDLEDZ    float32 `gorm:"qdledz"`        // 桥电流额定值
 }
