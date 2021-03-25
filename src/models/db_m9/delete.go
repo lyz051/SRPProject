@@ -51,3 +51,48 @@ func DeleteACBranchByID(id int) error {
 	}
 	return err
 }
+
+func DeleteTransformerByID(id int) error {
+	exist, err := ExistTransformerByID(id)
+	if exist && err == nil {
+		var trans Transformer
+		trans.ID = id
+		if err = Update(trans, map[string]interface{}{
+			"delete": 1,
+		}); err != nil {
+			return err
+		}
+		return nil
+	}
+	return err
+}
+
+func DeleteDCBranchByID(id int) error {
+	exist, err := ExistDCBranchByID(id)
+	if exist && err == nil {
+		var dcb DCBranch
+		dcb.ID = id
+		if err = Update(dcb, map[string]interface{}{
+			"delete": 1,
+		}); err != nil {
+			return err
+		}
+		return nil
+	}
+	return err
+}
+
+func DeleteConvertorByID(id int) error {
+	exist, err := ExistConvertorByID(id)
+	if exist && err == nil {
+		var cvt Convertor
+		cvt.ID = id
+		if err = Update(cvt, map[string]interface{}{
+			"delete": 1,
+		}); err != nil {
+			return err
+		}
+		return nil
+	}
+	return err
+}
