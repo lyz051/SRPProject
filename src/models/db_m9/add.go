@@ -20,24 +20,42 @@ func (a ACBranch) Add() error {
 }
 
 func (t Transformer) Add() error {
-	err := models.M9.Create(&t).Error
-	if err != nil {
+	exist, err := ExistTransformerByInstance(t)
+	if !exist && err == nil {
+		err = models.M9.Create(&t).Error
+		if err != nil {
+			return err
+		}
+	}
+	if !exist && err != nil {
 		return err
 	}
 	return nil
 }
 
 func (d DCBranch) Add() error {
-	err := models.M9.Create(&d).Error
-	if err != nil {
+	exist, err := ExistDCBranchByInstance(d)
+	if !exist && err == nil {
+		err = models.M9.Create(&d).Error
+		if err != nil {
+			return err
+		}
+	}
+	if !exist && err != nil {
 		return err
 	}
 	return nil
 }
 
 func (c Convertor) Add() error {
-	err := models.M9.Create(&c).Error
-	if err != nil {
+	exist, err := ExistConvertorhByInstance(c)
+	if !exist && err == nil {
+		err = models.M9.Create(&c).Error
+		if err != nil {
+			return err
+		}
+	}
+	if !exist && err != nil {
 		return err
 	}
 	return nil

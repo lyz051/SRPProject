@@ -93,6 +93,84 @@ func ExistACBranchByInstance(ins ACBranch) (bool, error) {
 	return false, nil
 }
 
+func ExistTransformerByInstance(ins Transformer) (bool, error) {
+	var transID []int
+	err := models.M9.Model(&Transformer{}).Select("id").Where("`delete` != ?", 1).
+		Where(map[string]interface{}{
+			"cdbz":   ins.CDBZ,
+			"fdcldh": ins.FDCLDH,
+			"s":      ins.S,
+			"blbsm":  ins.BLBSM,
+			"r_t":    ins.RT,
+			"x":      ins.X,
+			"tg":     ins.Tg,
+			"jg":     ins.Jg,
+			"fjt1":   ins.FJT1,
+			"fjt2":   ins.FJT2,
+		}).Pluck("id", &transID).Error
+	if err != nil && err != gorm.ErrRecordNotFound {
+		return false, err
+	}
+
+	if len(transID) > 0 {
+		return true, nil
+	}
+
+	return false, nil
+}
+
+func ExistDCBranchByInstance(ins DCBranch) (bool, error) {
+	var dcbID []int
+	err := models.M9.Model(&DCBranch{}).Select("id").Where("`delete` != ?", 1).
+		Where(map[string]interface{}{
+			"cdbz":           ins.CDBZ,
+			"i_base":         ins.IBase,
+			"r":              ins.R,
+			"x":              ins.X,
+			"c":              ins.C,
+			"glkzd":          ins.GLKZD,
+			"w":              ins.W,
+			"zlvolt":         ins.ZLVOLT,
+			"zlczccfj":       ins.zlczccfj,
+			"nbczcgdj":       ins.NBCZCGDJ,
+			"length":         ins.Length,
+			"parameter_type": ins.ParameterType,
+		}).Pluck("id", &dcbID).Error
+	if err != nil && err != gorm.ErrRecordNotFound {
+		return false, err
+	}
+
+	if len(dcbID) > 0 {
+		return true, nil
+	}
+
+	return false, nil
+}
+
+func ExistConvertorhByInstance(ins Convertor) (bool, error) {
+	var cvtID []int
+	err := models.M9.Model(&Convertor{}).Select("id").Where("`delete` != ?", 1).
+		Where(map[string]interface{}{
+			"fqm":            ins.FQM,
+			"zlxqs":          ins.ZLXQS,
+			"pbdkdg":         ins.PBDKDG,
+			"zxcfj":          ins.ZXCFJ,
+			"zdcfj":          ins.ZDCFJ,
+			"mgqfdyj":        ins.MGQFDYJ,
+			"qdledz":         ins.QDLEDZ,
+			"parameter_type": ins.ParameterType,
+		}).Pluck("id", &cvtID).Error
+	if err != nil && err != gorm.ErrRecordNotFound {
+		return false, err
+	}
+
+	if len(cvtID) > 0 {
+		return true, nil
+	}
+
+	return false, nil
+}
+
 func ExistACBranchByID(id int) (bool, error) {
 	var acbID []int
 	err := models.M9.Model(&ACBranch{}).Where("id = ?", id).Pluck("id", &acbID).Error
@@ -109,14 +187,14 @@ func ExistACBranchByID(id int) (bool, error) {
 }
 
 func ExistTransformerByID(id int) (bool, error) {
-	var acb ACBranch
-	err := models.M9.Model(&Transformer{}).Where("id = ?", id).First(&acb).Error
+	var transID []int
+	err := models.M9.Model(&Transformer{}).Where("id = ?", id).Pluck("id", &transID).Error
 	//err:=models.M9.Raw("SELECT id, type FROM "+table+" WHERE id = ?", id).Scan(&res).Error
 	if err != nil && err != gorm.ErrRecordNotFound {
 		return false, err
 	}
 
-	if acb.ID > 0 {
+	if len(transID) > 0 {
 		return true, nil
 	}
 
@@ -124,14 +202,14 @@ func ExistTransformerByID(id int) (bool, error) {
 }
 
 func ExistDCBranchByID(id int) (bool, error) {
-	var acb ACBranch
-	err := models.M9.Model(&DCBranch{}).Where("id = ?", id).First(&acb).Error
+	var dcbID []int
+	err := models.M9.Model(&DCBranch{}).Where("id = ?", id).Pluck("id", &dcbID).Error
 	//err:=models.M9.Raw("SELECT id, type FROM "+table+" WHERE id = ?", id).Scan(&res).Error
 	if err != nil && err != gorm.ErrRecordNotFound {
 		return false, err
 	}
 
-	if acb.ID > 0 {
+	if len(dcbID) > 0 {
 		return true, nil
 	}
 
@@ -139,14 +217,14 @@ func ExistDCBranchByID(id int) (bool, error) {
 }
 
 func ExistConvertorByID(id int) (bool, error) {
-	var acb ACBranch
-	err := models.M9.Model(&Convertor{}).Where("id = ?", id).First(&acb).Error
+	var cvtID []int
+	err := models.M9.Model(&Convertor{}).Where("id = ?", id).Pluck("id", &cvtID).Error
 	//err:=models.M9.Raw("SELECT id, type FROM "+table+" WHERE id = ?", id).Scan(&res).Error
 	if err != nil && err != gorm.ErrRecordNotFound {
 		return false, err
 	}
 
-	if acb.ID > 0 {
+	if len(cvtID) > 0 {
 		return true, nil
 	}
 
