@@ -65,15 +65,43 @@ func GetByID(table string, id int) (interface{}, error) {
 	return tableStruct, nil
 }
 
+func ExistACBranchByInstance(ins ACBranch) (bool, error) {
+	var acbID []int
+	err := models.M9.Model(&ACBranch{}).Select("id").Where("`delete` != ?", 1).
+		Where(map[string]interface{}{
+			"r":              ins.R,
+			"rpu":            ins.RPU,
+			"rate_a":         ins.RateA,
+			"x":              ins.X,
+			"x0":             ins.X0,
+			"xpu":            ins.XPU,
+			"i_ratedd":       ins.IRated,
+			"parallel_num":   ins.ParallelNum,
+			"G_2":            ins.G2,
+			"B_2":            ins.B2,
+			"length":         ins.Length,
+			"parameter_type": ins.ParameterType,
+		}).Pluck("id", &acbID).Error
+	if err != nil && err != gorm.ErrRecordNotFound {
+		return false, err
+	}
+
+	if len(acbID) > 0 {
+		return true, nil
+	}
+
+	return false, nil
+}
+
 func ExistACBranchByID(id int) (bool, error) {
-	var acb ACBranch
-	err := models.M9.Model(&ACBranch{}).Where("id = ?", id).First(&acb).Error
+	var acbID []int
+	err := models.M9.Model(&ACBranch{}).Where("id = ?", id).Pluck("id", &acbID).Error
 	//err:=models.M9.Raw("SELECT id, type FROM "+table+" WHERE id = ?", id).Scan(&res).Error
 	if err != nil && err != gorm.ErrRecordNotFound {
 		return false, err
 	}
 
-	if acb.ID > 0 {
+	if len(acbID) > 0 {
 		return true, nil
 	}
 

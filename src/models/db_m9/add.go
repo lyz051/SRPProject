@@ -6,7 +6,10 @@ import (
 )
 
 func (a ACBranch) Add() error {
-	err := models.M9.Create(&a).Error
+	exist, err := ExistACBranchByInstance(a)
+	if exist && err == nil {
+		err = models.M9.Create(&a).Error
+	}
 	if err != nil {
 		return err
 	}

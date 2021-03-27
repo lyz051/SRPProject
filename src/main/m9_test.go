@@ -63,7 +63,7 @@ func TestM9(t *testing.T) {
 	trans.AddUser = "lzt"
 
 	// Add
-	//db_m9.Add(acb)
+	db_m9.Add(acb)
 	//db_m9.Add(trans)
 
 	// Update
