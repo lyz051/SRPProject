@@ -21,8 +21,8 @@ type GeneratorParemeter struct {
 	Xqp       float32   `json:"xqp"`                            //交轴暂态电抗
 	Xd        float32   `json:"xd"`                             //直轴不饱和同步电抗
 	Xq        float32   `json:"xq"`                             //交轴不饱和同步电抗
-	Td0p      float32   `json:"td0p"`                           //饱和相关的指数
-	Tq0p      float32   `json:"tq0p"`                           //饱和相关的系数
+	Td0p      float32   `gorm:"column:td0p"`                    //饱和相关的指数
+	Tq0p      float32   `gorm:"column:tq0p"`                    //饱和相关的系数
 	N         float32   `json:"n"`                              //饱和相关的系数
 	A         float32   `json:"a"`                              //电机阻尼转矩系数
 	B         float32   `json:"b"`                              //添加数据的用户
