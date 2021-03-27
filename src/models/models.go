@@ -20,6 +20,8 @@ var (
 	M2   *gorm.DB
 	M8   *gorm.DB
 	M9   *gorm.DB
+	M10  *gorm.DB
+	M11  *gorm.DB
 	STOB *gorm.DB
 )
 var pageSize int
@@ -33,6 +35,8 @@ func Setup() {
 	M2, err = open(setting.DBNamesSetting.M2)
 	M8, err = open(setting.DBNamesSetting.M8)
 	M9, err = open(setting.DBNamesSetting.M9)
+	M10, err = open(setting.DBNamesSetting.M10)
+	M11, err = open(setting.DBNamesSetting.M11)
 	STOB, err = open(setting.DBNamesSetting.ScadaBpa)
 
 	if err != nil {
