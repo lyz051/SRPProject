@@ -7,20 +7,20 @@ import (
 )
 
 type DynamicModel struct {
-	ID          int       `json:"id"`           //动态元件ID
-	Name        string    `json:"name"`         //动态元件名称
-	MName       string    `json:"mname"`        //动态元件英文名称
-	Type        int       `json:"type"`         //元件类型
-	SubType     float32   `json:"sub_type"`     //元件子类型
-	ChgCode     float32   `json:"chg_code"`     //Chg码
-	BusName     string    `json:"bus_name"`     //母线英文名
-	KV          float32   `json:"kv"`           //基准电压
-	Mid         float32   `json:"mid"`          //发电机识别码
-	ParameterID int       `json:"parameter_id"` //当前使用的参数ID
-	AddUser     string    `json:"add_user"`     //添加数据的用户
-	AddTime     time.Time `json:"add_time"`     //添加时间
-	Delete      int       `json:"delete"`       //删除标志位
-	Ready       int       `json:"ready"`        //是否已填入数据
+	ID          int       `json:"id" gorm:"primarykey"`           //动态元件ID
+	Name        string    `json:"name"`                           //动态元件名称
+	MName       string    `json:"mname"`                          //动态元件英文名称
+	Type        int       `json:"type"`                           //元件类型
+	SubType     float32   `json:"sub_type"`                       //元件子类型
+	ChgCode     float32   `json:"chg_code"`                       //Chg码
+	BusName     string    `json:"bus_name"`                       //母线英文名
+	KV          float32   `json:"kv"`                             //基准电压
+	Mid         float32   `json:"mid"`                            //发电机识别码
+	ParameterID int       `json:"parameter_id"`                   //当前使用的参数ID
+	AddUser     string    `json:"add_user"`                       //添加数据的用户
+	AddTime     time.Time `json:"add_time" gorm:"autoUpdateTime"` //添加时间
+	Delete      int       `json:"delete"`                         //删除标志位
+	Ready       int       `json:"ready"`                          //是否已填入数据
 }
 
 //增加动态设备
