@@ -4,6 +4,7 @@ import (
 	"dbPractise/models"
 	"dbPractise/models/db_m9"
 	"dbPractise/setting"
+	"log"
 	"testing"
 )
 
@@ -63,8 +64,11 @@ func TestM9(t *testing.T) {
 	trans.AddUser = "lzt"
 
 	// Add
-	db_m9.Add(acb)
+	err := db_m9.Add(acb)
 	//db_m9.Add(trans)
+	if err != nil {
+		log.Println(err)
+	}
 
 	// Update
 	//acb.ID=6

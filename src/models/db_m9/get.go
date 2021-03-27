@@ -75,7 +75,7 @@ func ExistACBranchByInstance(ins ACBranch) (bool, error) {
 			"x":              ins.X,
 			"x0":             ins.X0,
 			"xpu":            ins.XPU,
-			"i_ratedd":       ins.IRated,
+			"i_rated":        ins.IRated,
 			"parallel_num":   ins.ParallelNum,
 			"G_2":            ins.G2,
 			"B_2":            ins.B2,
