@@ -18,7 +18,7 @@ type GeneratorParemeter struct {
 	MVABase   float32   `json:"mva_base"`                       //发电机标幺基准容量
 	Ra        float32   `json:"ra"`                             //定子电阻
 	Xdp       float32   `json:"xdp"`                            //直轴暂态电抗
-	Xdq       float32   `json:"xdq"`                            //交轴暂态电抗
+	Xqp       float32   `json:"xqp"`                            //交轴暂态电抗
 	Xd        float32   `json:"xd"`                             //直轴不饱和同步电抗
 	Xq        float32   `json:"xq"`                             //交轴不饱和同步电抗
 	Td0p      float32   `json:"td0p"`                           //饱和相关的指数
@@ -35,6 +35,17 @@ type GeneratorParemeter struct {
 }
 
 //增加动态元件参数
+
+func (a GeneratorParemeter) AddData() error {
+	exist, err := ExistGeneratorParemeterByInstance(a)
+	if !exist && err == nil {
+		a.Add()
+	}
+	if !exist && err != nil {
+		return err
+	}
+	return nil
+}
 
 func (b *GeneratorParemeter) Add() error {
 	if err := models.M11.Create(&b).Error; err != nil {
@@ -55,6 +66,41 @@ func ExistGeneratorParemeterByID(id int) (bool, error) {
 	if generatorparemeter.ID > 0 {
 		return true, nil
 	}
+	return false, nil
+}
+
+func ExistGeneratorParemeterByInstance(ins GeneratorParemeter) (bool, error) {
+	var GPID []int
+	err := models.M11.Model(&GeneratorParemeter{}).Select("id").Where("`delete` != ?", 1).
+		Where(map[string]interface{}{
+			"g_name":    ins.GName,
+			"kv":        ins.KV,
+			"mid":       ins.Mid,
+			"emws":      ins.Emws,
+			"p":         ins.P,
+			"q":         ins.Q,
+			"xq":        ins.Xq,
+			"xd":        ins.Xd,
+			"mva_base":  ins.MVABase,
+			"ra":        ins.Ra,
+			"xdp":       ins.Xdp,
+			"xqp":       ins.Xqp,
+			"td0p":      ins.Td0p,
+			"tq0p":      ins.Tq0p,
+			"n":         ins.N,
+			"a":         ins.A,
+			"b":         ins.B,
+			"d":         ins.D,
+			"paremeter": ins.Paremeter,
+		}).Pluck("id", &GPID).Error
+	if err != nil && err != gorm.ErrRecordNotFound {
+		return false, err
+	}
+
+	if len(GPID) > 0 {
+		return true, nil
+	}
+
 	return false, nil
 }
 
