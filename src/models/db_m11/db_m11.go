@@ -2,6 +2,7 @@ package db_m11
 
 import (
 	"dbPractise/models"
+	"encoding/json"
 	"gorm.io/gorm"
 	"time"
 )
@@ -105,17 +106,29 @@ func ExistGeneratorParemeterByInstance(ins GeneratorParemeter) (bool, error) {
 }
 
 //根据动态元件名称检索全部该动态元件的参数
-func GetGeneratorParemeterByGName(kv float32) ([]*GeneratorParemeter, error) {
+func GetGeneratorParemeterByGName(gname string) ([]GeneratorParemeter, error) {
 	var generator []GeneratorParemeter
-	err := models.M11.Where("kv = ?", kv).Find(&generator).Error
-	if err != nil && err != gorm.ErrRecordNotFound {
+	err := models.M11.Where("g_name = ?", gname).Find(&generator).Error
+	if err != nil {
 		return nil, err
 	}
-	temp := make([]*GeneratorParemeter, len(generator))
+	temp := make([]GeneratorParemeter, len(generator))
 	for aIndex, a := range generator {
-		temp[aIndex] = &a
+		temp[aIndex] = a
 	}
 	return temp, nil
+}
+
+func GiveByGName(gname string) map[int]map[string]interface{} {
+	c1 := make(map[int]map[string]interface{})
+	d, _ := GetGeneratorParemeterByGName(gname)
+	for i := range d {
+		var c2 map[string]interface{}
+		k, _ := json.Marshal(d[i])
+		json.Unmarshal(k, &c2)
+		c1[i] = c2
+	}
+	return c1
 }
 
 //删除部分，根据参数组ID删除该参数组
