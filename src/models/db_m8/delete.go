@@ -27,7 +27,7 @@ func DeleteBusPlant(name string) {
 	}
 }
 
-func DeleteACLinePlant(name string) {
+func DeleteACLine(name string) {
 	a := map[string]interface{}{
 		"delete": 1,
 	}
@@ -38,7 +38,7 @@ func DeleteACLinePlant(name string) {
 	}
 }
 
-func DeleteDCLinePlant(name string) {
+func DeleteDCLine(name string) {
 	a := map[string]interface{}{
 		"delete": 1,
 	}
@@ -49,7 +49,7 @@ func DeleteDCLinePlant(name string) {
 	}
 }
 
-func DeleteDCSystemPlant(name string) {
+func DeleteDCSystem(name string) {
 	a := map[string]interface{}{
 		"delete": 1,
 	}
@@ -60,7 +60,7 @@ func DeleteDCSystemPlant(name string) {
 	}
 }
 
-func DeleteConventorPlant(name string) {
+func DeleteConventor(name string) {
 	a := map[string]interface{}{
 		"delete": 1,
 	}
@@ -71,7 +71,7 @@ func DeleteConventorPlant(name string) {
 	}
 }
 
-func DeleteTransPlant(name string) {
+func DeleteTrans(name string) {
 	a := map[string]interface{}{
 		"delete": 1,
 	}

@@ -112,7 +112,7 @@ func ExistTransByName(name string) (bool, error) {
 func GetPowerPlantByID(id int) (*PowerPlant, error) {
 	var powerplant PowerPlant
 	err := models.M8.Where("id = ?", id).First(&powerplant).Error
-	if err != nil && err != gorm.ErrRecordNotFound {
+	if err != nil {
 		return nil, err
 	}
 	return &powerplant, nil
@@ -122,22 +122,22 @@ func GetPowerPlantByID(id int) (*PowerPlant, error) {
 func GetPowerPlantByName(name string) (*PowerPlant, error) {
 	var powerplant PowerPlant
 	err := models.M8.Where("name = ?", name).First(&powerplant).Error
-	if err != nil && err != gorm.ErrRecordNotFound {
+	if err != nil {
 		return nil, err
 	}
 	return &powerplant, nil
 }
 
 //根据基准电压检索
-func GetAllPowerPlantByVoltage(voltage float32) ([]*PowerPlant, error) {
+func GetAllPowerPlantByVoltage(voltage float32) ([]PowerPlant, error) {
 	var powerplant []PowerPlant
 	err := models.M8.Where("voltage = ?", voltage).Find(&powerplant).Error
-	if err != nil && err != gorm.ErrRecordNotFound {
+	if err != nil {
 		return nil, err
 	}
-	temp := make([]*PowerPlant, len(powerplant))
+	temp := make([]PowerPlant, len(powerplant))
 	for aIndex, a := range powerplant {
-		temp[aIndex] = &a
+		temp[aIndex] = a
 	}
 	return temp, nil
 }
@@ -148,7 +148,7 @@ func GetAllPowerPlantByVoltage(voltage float32) ([]*PowerPlant, error) {
 func GetBusByID(id int) (*Bus, error) {
 	var bus Bus
 	err := models.M8.Where("id = ?", id).First(&bus).Error
-	if err != nil && err != gorm.ErrRecordNotFound {
+	if err != nil {
 		return nil, err
 	}
 	return &bus, nil
@@ -158,22 +158,22 @@ func GetBusByID(id int) (*Bus, error) {
 func GetBusByName(name string) (*Bus, error) {
 	var bus Bus
 	err := models.M8.Where("name = ?", name).First(&bus).Error
-	if err != nil && err != gorm.ErrRecordNotFound {
+	if err != nil {
 		return nil, err
 	}
 	return &bus, nil
 }
 
 //根据基准电压检索全部
-func GetAllBusByVoltage(voltage float32) ([]*Bus, error) {
+func GetAllBusByVoltage(voltage float32) ([]Bus, error) {
 	var bus []Bus
 	err := models.M8.Where("voltage = ?", voltage).Find(&bus).Error
-	if err != nil && err != gorm.ErrRecordNotFound {
+	if err != nil {
 		return nil, err
 	}
-	temp := make([]*Bus, len(bus))
+	temp := make([]Bus, len(bus))
 	for aIndex, a := range bus {
-		temp[aIndex] = &a
+		temp[aIndex] = a
 	}
 	return temp, nil
 }
@@ -183,72 +183,73 @@ func GetAllBusByVoltage(voltage float32) ([]*Bus, error) {
 func GetACLineByID(id int) (*ACLine, error) {
 	var acline ACLine
 	err := models.M8.Where("id = ?", id).First(&acline).Error
-	if err != nil && err != gorm.ErrRecordNotFound {
+	if err != nil {
 		return nil, err
 	}
 	return &acline, nil
 }
+
 func GetACLineByName(name string) (*ACLine, error) {
 	var acline ACLine
 	err := models.M8.Where("name = ?", name).First(&acline).Error
-	if err != nil && err != gorm.ErrRecordNotFound {
+	if err != nil {
 		return nil, err
 	}
 	return &acline, nil
 }
 
 //根据A端母线名检索
-func GetAllACLineByBusA(bus_a string) ([]*ACLine, error) {
+func GetAllACLineByBusA(bus_a string) ([]ACLine, error) {
 	var acline []ACLine
 	err := models.M8.Where("bus_a = ?", bus_a).Find(&acline).Error
-	if err != nil && err != gorm.ErrRecordNotFound {
+	if err != nil {
 		return nil, err
 	}
-	temp := make([]*ACLine, len(acline))
+	temp := make([]ACLine, len(acline))
 	for aIndex, a := range acline {
-		temp[aIndex] = &a
+		temp[aIndex] = a
 	}
 	return temp, nil
 }
 
 //根据B端母线名检索
-func GetAllACLineByBusB(bus_b string) ([]*ACLine, error) {
+func GetAllACLineByBusB(bus_b string) ([]ACLine, error) {
 	var acline []ACLine
 	err := models.M8.Where("bus_b = ?", bus_b).Find(&acline).Error
-	if err != nil && err != gorm.ErrRecordNotFound {
+	if err != nil {
 		return nil, err
 	}
-	temp := make([]*ACLine, len(acline))
+	temp := make([]ACLine, len(acline))
 	for aIndex, a := range acline {
-		temp[aIndex] = &a
+		temp[aIndex] = a
 	}
 	return temp, nil
 }
 
 //根据A端厂站名检索
-func GetAllACLineSTIDA(stid_a string) ([]*ACLine, error) {
+func GetAllACLineSTIDA(stid_a string) ([]ACLine, error) {
 	var acline []ACLine
 	err := models.M8.Where("stid_a = ?", stid_a).Find(&acline).Error
-	if err != nil && err != gorm.ErrRecordNotFound {
+	if err != nil {
 		return nil, err
 	}
-	temp := make([]*ACLine, len(acline))
+	temp := make([]ACLine, len(acline))
 	for aIndex, a := range acline {
-		temp[aIndex] = &a
+		temp[aIndex] = a
 	}
 	return temp, nil
 }
 
 //根据B端厂站名检索
-func GetAllACLineSTIDB(stid_b string) ([]*ACLine, error) {
+func GetAllACLineSTIDB(stid_b string) ([]ACLine, error) {
 	var acline []ACLine
 	err := models.M8.Where("stid_b = ?", stid_b).Find(&acline).Error
-	if err != nil && err != gorm.ErrRecordNotFound {
+	if err != nil {
 		return nil, err
 	}
-	temp := make([]*ACLine, len(acline))
+	temp := make([]ACLine, len(acline))
 	for aIndex, a := range acline {
-		temp[aIndex] = &a
+		temp[aIndex] = a
 	}
 	return temp, nil
 }
@@ -258,7 +259,7 @@ func GetAllACLineSTIDB(stid_b string) ([]*ACLine, error) {
 func GetDCLineByID(id int) (*DCLine, error) {
 	var dcline DCLine
 	err := models.M8.Where("id = ?", id).First(&dcline).Error
-	if err != nil && err != gorm.ErrRecordNotFound {
+	if err != nil {
 		return nil, err
 	}
 	return &dcline, nil
@@ -266,7 +267,7 @@ func GetDCLineByID(id int) (*DCLine, error) {
 func GetDCLineByName(name string) (*DCLine, error) {
 	var dcline DCLine
 	err := models.M8.Where("name = ?", name).First(&dcline).Error
-	if err != nil && err != gorm.ErrRecordNotFound {
+	if err != nil {
 		return nil, err
 	}
 	return &dcline, nil
@@ -277,7 +278,7 @@ func GetDCLineByName(name string) (*DCLine, error) {
 func GetDCSysByID(id int) (*DCSystem, error) {
 	var dcsys DCSystem
 	err := models.M8.Where("id = ?", id).First(&dcsys).Error
-	if err != nil && err != gorm.ErrRecordNotFound {
+	if err != nil {
 		return nil, err
 	}
 	return &dcsys, nil
@@ -285,7 +286,7 @@ func GetDCSysByID(id int) (*DCSystem, error) {
 func GetDCSysByName(name string) (*DCSystem, error) {
 	var dcsys DCSystem
 	err := models.M8.Where("name = ?", name).First(&dcsys).Error
-	if err != nil && err != gorm.ErrRecordNotFound {
+	if err != nil {
 		return nil, err
 	}
 	return &dcsys, nil
@@ -296,7 +297,7 @@ func GetDCSysByName(name string) (*DCSystem, error) {
 func GetConventorByID(id int) (*Conventor, error) {
 	var conventor Conventor
 	err := models.M8.Where("id = ?", id).First(&conventor).Error
-	if err != nil && err != gorm.ErrRecordNotFound {
+	if err != nil {
 		return nil, err
 	}
 	return &conventor, nil
@@ -304,7 +305,7 @@ func GetConventorByID(id int) (*Conventor, error) {
 func GetConventorByName(name string) (*Conventor, error) {
 	var conventor Conventor
 	err := models.M8.Where("name = ?", name).First(&conventor).Error
-	if err != nil && err != gorm.ErrRecordNotFound {
+	if err != nil {
 		return nil, err
 	}
 	return &conventor, nil
@@ -315,7 +316,7 @@ func GetConventorByName(name string) (*Conventor, error) {
 func GetTransByID(id int) (*Trans, error) {
 	var trans Trans
 	err := models.M8.Where("id = ?", id).First(&trans).Error
-	if err != nil && err != gorm.ErrRecordNotFound {
+	if err != nil {
 		return nil, err
 	}
 	return &trans, nil
@@ -323,7 +324,7 @@ func GetTransByID(id int) (*Trans, error) {
 func GetTransByName(name string) (*Trans, error) {
 	var trans Trans
 	err := models.M8.Where("name = ?", name).First(&trans).Error
-	if err != nil && err != gorm.ErrRecordNotFound {
+	if err != nil {
 		return nil, err
 	}
 	return &trans, nil
