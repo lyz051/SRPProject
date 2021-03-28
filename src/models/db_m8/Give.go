@@ -76,14 +76,11 @@ func GivePlowerPlantByVoltage(voltage float32) map[int]map[string]interface{} {
 //bus
 func GiveBusByVoltage(voltage float32) map[int]map[string]interface{} {
 	c1 := make(map[int]map[string]interface{})
-	//c2 := make(map[string]interface{})
 	d, _ := GetAllBusByVoltage(voltage)
 	for i := range d {
 		var c2 map[string]interface{}
 		k, _ := json.Marshal(d[i])
 		json.Unmarshal(k, &c2)
-		//fmt.Println(c2)
-		//fmt.Println(c2["id"])
 		c1[i] = c2
 	}
 	return c1
