@@ -59,7 +59,7 @@ func GetByID(table string, id int) (interface{}, error) {
 	}
 
 	err := models.M8.Where("id = ? and delete != 1", id).First(&tableStruct).Error
-	if err != nil || err != gorm.ErrRecordNotFound {
+	if err != nil {
 		return nil, err
 	}
 	return tableStruct, nil
@@ -234,7 +234,7 @@ func ExistConvertorByID(id int) (bool, error) {
 func GetACBranchByID(id int) (*ACBranch, error) {
 	var acb ACBranch
 	err := models.M9.Model(&ACBranch{}).Where("id = ? and `delete` != 1", id).First(&acb).Error
-	if err != nil && err != gorm.ErrRecordNotFound {
+	if err != nil {
 		return nil, err
 	}
 	return &acb, nil
@@ -243,7 +243,7 @@ func GetACBranchByID(id int) (*ACBranch, error) {
 func GetTransformerByID(id int) (*Transformer, error) {
 	var trans Transformer
 	err := models.M9.Model(&Transformer{}).Where("id = ? and `delete` != 1", id).First(&trans).Error
-	if err != nil && err != gorm.ErrRecordNotFound {
+	if err != nil {
 		return nil, err
 	}
 	return &trans, nil
@@ -252,7 +252,7 @@ func GetTransformerByID(id int) (*Transformer, error) {
 func GetDCBranchByID(id int) (*DCBranch, error) {
 	var dcb DCBranch
 	err := models.M9.Model(&DCBranch{}).Where("id = ? and `delete` != 1", id).First(&dcb).Error
-	if err != nil && err != gorm.ErrRecordNotFound {
+	if err != nil {
 		return nil, err
 	}
 	return &dcb, nil
@@ -261,7 +261,7 @@ func GetDCBranchByID(id int) (*DCBranch, error) {
 func GetConvertorByID(id int) (*Convertor, error) {
 	var cvt Convertor
 	err := models.M9.Model(&Convertor{}).Where("id = ? and `delete` != 1", id).First(&cvt).Error
-	if err != nil && err != gorm.ErrRecordNotFound {
+	if err != nil {
 		return nil, err
 	}
 	return &cvt, nil
