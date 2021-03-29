@@ -131,7 +131,7 @@ func ExistDCBranchByInstance(ins DCBranch) (bool, error) {
 			"glkzd":          ins.GLKZD,
 			"w":              ins.W,
 			"zlvolt":         ins.ZLVOLT,
-			"zlczccfj":       ins.zlczccfj,
+			"Zlczccfj":       ins.ZLCZCCFJ,
 			"nbczcgdj":       ins.NBCZCGDJ,
 			"length":         ins.Length,
 			"parameter_type": ins.ParameterType,
@@ -265,4 +265,40 @@ func GetConvertorByID(id int) (*Convertor, error) {
 		return nil, err
 	}
 	return &cvt, nil
+}
+
+func GetACBranchByParentName(name string) ([]ACBranch, error) {
+	var acb []ACBranch
+	err := models.M9.Model(&ACBranch{}).Where("line_name = ? and `delete` != 1", name).Find(&acb).Error
+	if err != nil {
+		return nil, err
+	}
+	return acb, nil
+}
+
+func GetTransformerByParentName(name string) ([]Transformer, error) {
+	var trans []Transformer
+	err := models.M9.Model(&Transformer{}).Where("trans_name = ? and `delete` != 1", name).Find(&trans).Error
+	if err != nil {
+		return nil, err
+	}
+	return trans, nil
+}
+
+func GetDCBranchByParentName(name string) ([]DCBranch, error) {
+	var dcb []DCBranch
+	err := models.M9.Model(&DCBranch{}).Where("line_name = ? and `delete` != 1", name).Find(&dcb).Error
+	if err != nil {
+		return nil, err
+	}
+	return dcb, nil
+}
+
+func GetConvertorByParentName(name string) ([]Convertor, error) {
+	var cvt []Convertor
+	err := models.M9.Model(&Convertor{}).Where("trans_name = ? and `delete` != 1", name).Find(&cvt).Error
+	if err != nil {
+		return nil, err
+	}
+	return cvt, nil
 }

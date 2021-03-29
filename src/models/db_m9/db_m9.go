@@ -64,7 +64,7 @@ type DCBranch struct {
 	GLKZD    string  `gorm:"column:glkzd"` // 安排直流功率控制点
 	W        float32 // 安排直流功率
 	ZLVOLT   float32 `gorm:"column:zlvolt"`   // 给定整流侧直流电压
-	zlczccfj float32 `gorm:"column:zlczccfj"` // 整流侧政策触发角
+	ZLCZCCFJ float32 `gorm:"column:Zlczccfj"` // 整流侧政策触发角
 	NBCZCGDJ float32 `gorm:"column:nbczcgdj"` // 逆变侧正常关断角
 	Length   float32 `json:"length"`
 }

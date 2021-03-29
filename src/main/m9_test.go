@@ -59,16 +59,21 @@ func TestM9(t *testing.T) {
 	// M9 反射测试
 	var acb db_m9.ACBranch
 	var trans db_m9.Transformer
+	var dcb db_m9.DCBranch
+	var cvt db_m9.Convertor
 	acb.LineName = "testLine"
 	trans.TransName = "testTrans"
 	trans.AddUser = "lzt"
+	dcb.LineName = "testLine"
+	cvt.AddUser = "lzt"
+	cvt.QDLEDZ = 2
+	cvt.TransName = "testTrans"
 
 	// Add
-	err := db_m9.Add(acb)
-	//db_m9.Add(trans)
-	if err != nil {
-		log.Println(err)
-	}
+	//err := db_m9.Add(cvt)
+	//if err != nil {
+	//	log.Println(err)
+	//}
 
 	// Update
 	//acb.ID=6
@@ -83,20 +88,31 @@ func TestM9(t *testing.T) {
 	//db_m9.Update(trans,data2)
 
 	//Get
-	//id := 6
-	////exist,err:=db_m9.ExistByID("ac_branch", id)
-	//exist, err := db_m9.ExistACBranchByID(id)
+	//id := 1
+	////exist, err := db_m9.ExistACBranchByID(id)
+	////exist, err := db_m9.ExistDCBranchByID(id)
+	////exist, err := db_m9.ExistConvertorByID(id)
+	//exist, err := db_m9.ExistTransformerByID(id)
 	//if exist && err == nil {
-	//	//acb,err:=db_m9.GetByID("ac_branch",id)
-	//	acb, err := db_m9.GetACBranchByID(id)
+	//	//acb, err := db_m9.GetACBranchByID(id)
+	//	//ins, err := db_m9.GetDCBranchByID(id)
+	//	//ins, err := db_m9.GetConvertorByID(id)
+	//	ins, err := db_m9.GetTransformerByID(id)
 	//	if err != nil {
 	//		log.Println(err)
 	//	}
-	//	log.Printf("%#v", acb)
+	//	log.Printf("%#v", ins)
 	//}
 
 	//Delete
 	//acb.ID = 7
 	////db_m9.Delete(acb)
 	//db_m9.DeleteACBranchByID(acb.ID)
+
+	// Give
+	//id:=2
+	//ins:=db_m9.GiveByID(id,"ac_branch")
+	name := "testTrans"
+	ins := db_m9.GiveByParentName(name, "convertor")
+	log.Println(ins)
 }
