@@ -106,13 +106,13 @@ func ExistGeneratorParemeterByInstance(ins GeneratorParemeter) (bool, error) {
 }
 
 //根据动态元件名称检索全部该动态元件的参数
-func GetGeneratorParemeterByGName(gname string, delete int, limit int) ([]GeneratorParemeter, error) {
+func GetGeneratorParemeterByGName(gname string, delete int, limit int, page int) ([]GeneratorParemeter, error) {
 	var generator []GeneratorParemeter
 	var err error
 	if delete == 0 || delete == 1 {
-		err = models.M11.Where("g_name = ? AND `delete` = ? ", gname, delete).Limit(limit).Find(&generator).Error
+		err = models.M11.Where("g_name = ? AND `delete` = ? ", gname, delete).Limit(limit).Offset((page - 1) * limit).Find(&generator).Error
 	} else if delete == 2 {
-		err = models.M11.Where("g_name = ? ", gname).Limit(limit).Find(&generator).Error
+		err = models.M11.Where("g_name = ? ", gname).Limit(limit).Offset((page - 1) * limit).Find(&generator).Error
 	} else {
 		return nil, nil
 	}
@@ -126,9 +126,9 @@ func GetGeneratorParemeterByGName(gname string, delete int, limit int) ([]Genera
 	return temp, nil
 }
 
-func GiveByGName(gname string, delete int, limit int) map[int]map[string]interface{} {
+func GiveByGName(gname string, delete int, limit int, page int) map[int]map[string]interface{} {
 	c1 := make(map[int]map[string]interface{})
-	d, _ := GetGeneratorParemeterByGName(gname, delete, limit)
+	d, _ := GetGeneratorParemeterByGName(gname, delete, limit, page)
 	for i := range d {
 		var c2 map[string]interface{}
 		k, _ := json.Marshal(d[i])

@@ -128,13 +128,13 @@ func GetDynamicModelByMName(mname string, delete int) (*DynamicModel, error) {
 }
 
 //根据基准电压检索
-func GetDynamicModelByKV(kv float32, delete int, limit int) ([]DynamicModel, error) {
+func GetDynamicModelByKV(kv float32, delete int, limit int, page int) ([]DynamicModel, error) {
 	var dynamicmodel []DynamicModel
 	var err error
 	if delete == 0 || delete == 1 {
-		err = models.M10.Where("kv = ? AND `delete` = ? ", kv, delete).Limit(limit).Find(&dynamicmodel).Error
+		err = models.M10.Where("kv = ? AND `delete` = ? ", kv, delete).Limit(limit).Offset((page - 1) * limit).Find(&dynamicmodel).Error
 	} else if delete == 2 {
-		err = models.M10.Where("kv = ?", kv).Limit(limit).Find(&dynamicmodel).Error
+		err = models.M10.Where("kv = ?", kv).Limit(limit).Offset((page - 1) * limit).Find(&dynamicmodel).Error
 	} else {
 		return nil, nil
 	}
@@ -172,9 +172,9 @@ func GiveByMName(mname string, delete int) map[string]interface{} {
 	return b
 }
 
-func GiveByKV(kv float32, delete int, limit int) map[int]map[string]interface{} {
+func GiveByKV(kv float32, delete int, limit int, page int) map[int]map[string]interface{} {
 	c1 := make(map[int]map[string]interface{})
-	d, _ := GetDynamicModelByKV(kv, delete, limit)
+	d, _ := GetDynamicModelByKV(kv, delete, limit, page)
 	for i := range d {
 		var c2 map[string]interface{}
 		k, _ := json.Marshal(d[i])
