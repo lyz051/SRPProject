@@ -48,7 +48,7 @@ func TestDynamicModel(t *testing.T) {
 	a, b, c := db_m10.GiveByID(1, 0), db_m10.GiveByMName("dynamicmodel2", 0), db_m10.GiveByName("动态模型3", 0)
 	fmt.Println(a, "\n", b, "\n", c)
 
-	d := db_m10.GiveByKV(220, 0)
+	d := db_m10.GiveByKV(220, 0, 10)
 	fmt.Println(d)
 
 	//修改参数组ID

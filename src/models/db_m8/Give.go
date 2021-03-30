@@ -60,10 +60,10 @@ func GiveByName(name string, delete int, table string) map[string]interface{} {
 }
 
 //powerplant
-func GivePlowerPlantByVoltage(voltage float32, delete int) map[int]map[string]interface{} {
+func GivePlowerPlantByVoltage(voltage float32, delete int, limit int) map[int]map[string]interface{} {
 	c1 := make(map[int]map[string]interface{})
 	//c2 := make(map[string]interface{})
-	d, _ := GetAllPowerPlantByVoltage(voltage, delete)
+	d, _ := GetAllPowerPlantByVoltage(voltage, delete, limit)
 	for i := range d {
 		var c2 map[string]interface{}
 		k, _ := json.Marshal(d[i])
@@ -76,9 +76,9 @@ func GivePlowerPlantByVoltage(voltage float32, delete int) map[int]map[string]in
 }
 
 //bus
-func GiveBusByVoltage(voltage float32, delete int) map[int]map[string]interface{} {
+func GiveBusByVoltage(voltage float32, delete int, limit int) map[int]map[string]interface{} {
 	c1 := make(map[int]map[string]interface{})
-	d, _ := GetAllBusByVoltage(voltage, delete)
+	d, _ := GetAllBusByVoltage(voltage, delete, limit)
 	for i := range d {
 		var c2 map[string]interface{}
 		k, _ := json.Marshal(d[i])
@@ -89,9 +89,9 @@ func GiveBusByVoltage(voltage float32, delete int) map[int]map[string]interface{
 }
 
 //acline
-func GiveACLineBySTIDA(stid_a string, delete int) map[int]map[string]interface{} {
+func GiveACLineBySTIDA(stid_a string, delete int, limit int) map[int]map[string]interface{} {
 	c1 := make(map[int]map[string]interface{})
-	d, _ := GetAllACLineSTIDA(stid_a, delete)
+	d, _ := GetAllACLineSTIDA(stid_a, delete, limit)
 	for i := range d {
 		var c2 map[string]interface{}
 		k, _ := json.Marshal(d[i])
@@ -101,9 +101,9 @@ func GiveACLineBySTIDA(stid_a string, delete int) map[int]map[string]interface{}
 	return c1
 }
 
-func GiveACLineBySTIDB(stid_b string, delete int) map[int]map[string]interface{} {
+func GiveACLineBySTIDB(stid_b string, delete int, limit int) map[int]map[string]interface{} {
 	c1 := make(map[int]map[string]interface{})
-	d, _ := GetAllACLineSTIDB(stid_b, delete)
+	d, _ := GetAllACLineSTIDB(stid_b, delete, limit)
 	for i := range d {
 		var c2 map[string]interface{}
 		k, _ := json.Marshal(d[i])
@@ -113,9 +113,9 @@ func GiveACLineBySTIDB(stid_b string, delete int) map[int]map[string]interface{}
 	return c1
 }
 
-func GiveACLineByBusA(busa string, delete int) map[int]map[string]interface{} {
+func GiveACLineByBusA(busa string, delete int, limit int) map[int]map[string]interface{} {
 	c1 := make(map[int]map[string]interface{})
-	d, _ := GetAllACLineByBusA(busa, delete)
+	d, _ := GetAllACLineByBusA(busa, delete, limit)
 	for i := range d {
 		var c2 map[string]interface{}
 		k, _ := json.Marshal(d[i])
@@ -125,9 +125,9 @@ func GiveACLineByBusA(busa string, delete int) map[int]map[string]interface{} {
 	return c1
 }
 
-func GiveACLineByBusB(busb string, delete int) map[int]map[string]interface{} {
+func GiveACLineByBusB(busb string, delete int, limit int) map[int]map[string]interface{} {
 	c1 := make(map[int]map[string]interface{})
-	d, _ := GetAllACLineByBusB(busb, delete)
+	d, _ := GetAllACLineByBusB(busb, delete, limit)
 	for i := range d {
 		var c2 map[string]interface{}
 		k, _ := json.Marshal(d[i])

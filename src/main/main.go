@@ -2,14 +2,13 @@ package main
 
 import (
 	"dbPractise/models"
-	"dbPractise/pkg/logging"
 	"dbPractise/setting"
 )
 
 func main() {
 	setting.Setup()
 	models.Setup()
-	logging.Setup()
+	//logging.Setup()
 
 	// Add
 	//article := map[string]interface{}{
@@ -49,4 +48,44 @@ func main() {
 	// Exist
 	//exist := util.ExistArticleByID(25)
 	//log.Println(exist)
+
+	//b := db_m8.GiveByID(1, 0,"power_plant")
+	//fmt.Println(b)
+
+	//num := 1
+	//var m int
+	//var powerplant []db_m8.PowerPlant
+	//for {
+	//	_, err := fmt.Scan(&m)
+	//	if err == io.EOF{
+	//		break
+	//	}else{
+	//		c := db_m8.GivePlowerPlantByVoltage(220, 2, num)
+	//		powerplant, _ = db_m8.GetAllPowerPlantByVoltage(220, 2, num)
+	//		fmt.Println(c)
+	//	}
+	//	num++
+	//	if num > len(powerplant){
+	//		break
+	//	}
+	//}
+
+	//num := 1
+	//var powerplant []db_m8.PowerPlant
+	//for {
+	//	var m int
+	//	_, err := fmt.Scanln(&m)
+	//	if err == io.EOF{
+	//		break
+	//	}else{
+	//		c := db_m8.GivePlowerPlantByVoltage(220, 2, num)
+	//		powerplant, _ = db_m8.GetAllPowerPlantByVoltage(220, 2, num)
+	//		fmt.Println(c)
+	//	}
+	//	num++
+	//	if num > len(powerplant){
+	//		break
+	//	}
+	//}
+
 }

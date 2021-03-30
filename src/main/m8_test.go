@@ -5,6 +5,7 @@ import (
 	"dbPractise/models/db_m8"
 	"dbPractise/setting"
 	"fmt"
+	"io"
 	"testing"
 )
 
@@ -50,8 +51,24 @@ func TestPowerPlant(t *testing.T) {
 	//a := db_m8.GiveByName("changzhan4",0, "power_plant")
 	//fmt.Println(a)
 
-	c := db_m8.GivePlowerPlantByVoltage(220, 0)
-	fmt.Println(c)
+	num := 1
+	var powerplant []db_m8.PowerPlant
+	for {
+		var m int
+		_, err := fmt.Scanln(&m)
+		if err == io.EOF {
+			break
+		} else {
+			c := db_m8.GivePlowerPlantByVoltage(220, 2, num)
+			powerplant, _ = db_m8.GetAllPowerPlantByVoltage(220, 2, num)
+			fmt.Println(c)
+		}
+		num++
+		if num > len(powerplant) {
+			break
+		}
+	}
+
 }
 
 func TestBus(t *testing.T) {
@@ -89,7 +106,7 @@ func TestBus(t *testing.T) {
 	b := db_m8.GiveByName("bus1", 0, "bus")
 	fmt.Println(b)
 
-	c := db_m8.GiveBusByVoltage(220, 0)
+	c := db_m8.GiveBusByVoltage(220, 0, 10)
 	fmt.Println(c)
 }
 
@@ -146,13 +163,13 @@ func TestACLine(t *testing.T) {
 	//b := db_m8.GiveByName("ACLine1", 0,"ac_line")
 	//fmt.Println(b)
 	//
-	//c, d := db_m8.GiveACLineByBusA("bus1",0), db_m8.GiveACLineByBusB("bus2",0)
-	//fmt.Println(c)
-	//fmt.Println(d)
-	//
-	//e, f := db_m8.GiveACLineBySTIDA("changzhan1",0), db_m8.GiveACLineBySTIDB("changzhan2",0)
-	//fmt.Println(e)
-	//fmt.Println(f)
+	c, d := db_m8.GiveACLineByBusA("bus1", 0, 10), db_m8.GiveACLineByBusB("bus2", 0, 10)
+	fmt.Println(c)
+	fmt.Println(d)
+
+	e, f := db_m8.GiveACLineBySTIDA("changzhan1", 0, 10), db_m8.GiveACLineBySTIDB("changzhan2", 0, 10)
+	fmt.Println(e)
+	fmt.Println(f)
 
 	//修改当前使用参数组ID
 	new_id := 2

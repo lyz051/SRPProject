@@ -147,13 +147,13 @@ func GetPowerPlantByName(name string, delete int) (*PowerPlant, error) {
 }
 
 //根据基准电压检索
-func GetAllPowerPlantByVoltage(voltage float32, delete int) ([]PowerPlant, error) {
+func GetAllPowerPlantByVoltage(voltage float32, delete int, limit int) ([]PowerPlant, error) {
 	var powerplant []PowerPlant
 	var err error
 	if delete == 1 || delete == 0 {
-		err = models.M8.Where("voltage = ? AND `delete` = ? ", voltage, delete).Find(&powerplant).Error
+		err = models.M8.Where("voltage = ? AND `delete` = ? ", voltage, delete).Limit(limit).Find(&powerplant).Error
 	} else if delete == 2 {
-		err = models.M8.Where("voltage = ?", voltage).Find(&powerplant).Error
+		err = models.M8.Where("voltage = ?", voltage).Limit(limit).Find(&powerplant).Error
 	} else {
 		return nil, nil
 	}
@@ -206,13 +206,13 @@ func GetBusByName(name string, delete int) (*Bus, error) {
 }
 
 //根据基准电压检索全部
-func GetAllBusByVoltage(voltage float32, delete int) ([]Bus, error) {
+func GetAllBusByVoltage(voltage float32, delete int, limit int) ([]Bus, error) {
 	var bus []Bus
 	var err error
 	if delete == 1 || delete == 0 {
-		err = models.M8.Where("voltage = ? AND `delete` = ? ", voltage, delete).Find(&bus).Error
+		err = models.M8.Where("voltage = ? AND `delete` = ? ", voltage, delete).Limit(limit).Find(&bus).Error
 	} else if delete == 2 {
-		err = models.M8.Where("voltage = ?", voltage).Find(&bus).Error
+		err = models.M8.Where("voltage = ?", voltage).Limit(limit).Find(&bus).Error
 	} else {
 		return nil, nil
 	}
@@ -263,13 +263,13 @@ func GetACLineByName(name string, delete int) (*ACLine, error) {
 }
 
 //根据A端母线名检索
-func GetAllACLineByBusA(bus_a string, delete int) ([]ACLine, error) {
+func GetAllACLineByBusA(bus_a string, delete int, limit int) ([]ACLine, error) {
 	var acline []ACLine
 	var err error
 	if delete == 1 || delete == 0 {
-		err = models.M8.Where("bus_a = ? AND `delete` = ? ", bus_a, delete).Find(&acline).Error
+		err = models.M8.Where("bus_a = ? AND `delete` = ? ", bus_a, delete).Limit(limit).Find(&acline).Error
 	} else if delete == 2 {
-		err = models.M8.Where("bus_a = ?", bus_a).Find(&acline).Error
+		err = models.M8.Where("bus_a = ?", bus_a).Limit(limit).Find(&acline).Error
 	} else {
 		return nil, nil
 	}
@@ -284,13 +284,13 @@ func GetAllACLineByBusA(bus_a string, delete int) ([]ACLine, error) {
 }
 
 //根据B端母线名检索
-func GetAllACLineByBusB(bus_b string, delete int) ([]ACLine, error) {
+func GetAllACLineByBusB(bus_b string, delete int, limit int) ([]ACLine, error) {
 	var acline []ACLine
 	var err error
 	if delete == 1 || delete == 0 {
-		err = models.M8.Where("bus_a = ? AND `delete` = ? ", bus_b, delete).Find(&acline).Error
+		err = models.M8.Where("bus_a = ? AND `delete` = ? ", bus_b, delete).Limit(limit).Find(&acline).Error
 	} else if delete == 2 {
-		err = models.M8.Where("bus_a = ?", bus_b).Find(&acline).Error
+		err = models.M8.Where("bus_a = ?", bus_b).Limit(limit).Find(&acline).Error
 	} else {
 		return nil, nil
 	}
@@ -308,13 +308,13 @@ func GetAllACLineByBusB(bus_b string, delete int) ([]ACLine, error) {
 }
 
 //根据A端厂站名检索
-func GetAllACLineSTIDA(stid_a string, delete int) ([]ACLine, error) {
+func GetAllACLineSTIDA(stid_a string, delete int, limit int) ([]ACLine, error) {
 	var acline []ACLine
 	var err error
 	if delete == 1 || delete == 0 {
-		err = models.M8.Where("stid_a = ? AND `delete` = ? ", stid_a, delete).Find(&acline).Error
+		err = models.M8.Where("stid_a = ? AND `delete` = ? ", stid_a, delete).Limit(limit).Find(&acline).Error
 	} else if delete == 2 {
-		err = models.M8.Where("stid_a = ?", stid_a).Find(&acline).Error
+		err = models.M8.Where("stid_a = ?", stid_a).Limit(limit).Find(&acline).Error
 	} else {
 		return nil, nil
 	}
@@ -329,13 +329,13 @@ func GetAllACLineSTIDA(stid_a string, delete int) ([]ACLine, error) {
 }
 
 //根据B端厂站名检索
-func GetAllACLineSTIDB(stid_b string, delete int) ([]ACLine, error) {
+func GetAllACLineSTIDB(stid_b string, delete int, limit int) ([]ACLine, error) {
 	var acline []ACLine
 	var err error
 	if delete == 1 || delete == 0 {
-		err = models.M8.Where("stid_a = ? AND `delete` = ? ", stid_b, delete).Find(&acline).Error
+		err = models.M8.Where("stid_a = ? AND `delete` = ? ", stid_b, delete).Limit(limit).Find(&acline).Error
 	} else if delete == 2 {
-		err = models.M8.Where("stid_a = ?", stid_b).Find(&acline).Error
+		err = models.M8.Where("stid_a = ?", stid_b).Limit(limit).Find(&acline).Error
 	} else {
 		return nil, nil
 	}
