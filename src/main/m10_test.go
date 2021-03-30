@@ -2,7 +2,9 @@ package main
 
 import (
 	"dbPractise/models"
+	"dbPractise/models/db_m10"
 	"dbPractise/setting"
+	"fmt"
 	"testing"
 )
 
@@ -43,11 +45,11 @@ func TestDynamicModel(t *testing.T) {
 	//db_m10.DeleteDynamicModelByMName(m_name)
 
 	//查询
-	//a, b, c := db_m10.GiveByID(1), db_m10.GiveByMName("dynamicmodel2"), db_m10.GiveByName("动态模型3")
-	//fmt.Println(a,"\n", b, "\n", c)
-	//
-	//d := db_m10.GiveByKV(220)
-	//fmt.Println(d)
+	a, b, c := db_m10.GiveByID(1, 0), db_m10.GiveByMName("dynamicmodel2", 0), db_m10.GiveByName("动态模型3", 0)
+	fmt.Println(a, "\n", b, "\n", c)
+
+	d := db_m10.GiveByKV(220, 0)
+	fmt.Println(d)
 
 	//修改参数组ID
 	//new_id := 2

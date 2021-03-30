@@ -14,8 +14,8 @@ func TestPowerPlant(t *testing.T) {
 
 	// 增加
 	//pp := map[string]interface{}{
-	//	"name":            "changzhan3",
-	//	"c_name":          "厂站1",
+	//	"name":            "changzhan4",
+	//	"c_name":          "厂站4",
 	//	"type":            "不知道是啥",
 	//	"belong_province": "GuangDong",
 	//	"belong_city":     "Guangzhou",
@@ -40,17 +40,18 @@ func TestPowerPlant(t *testing.T) {
 	//}
 
 	//Delete 测试
-	//name := "changzhan3"
+	//name := "changzhan4"
 	//db_m8.DeletePowerPlant(name)
 
 	//查询测试
-	b := db_m8.GiveByID(1, "power_plant")
-	fmt.Println(b)
-	a := db_m8.GiveByName("changzhan1", "power_plant")
-	fmt.Println(a)
+	//查询:delete：已删除：1，未删除：0,全部：2
+	//b := db_m8.GiveByID(1, 0,"power_plant")
+	//fmt.Println(b)
+	//a := db_m8.GiveByName("changzhan4",0, "power_plant")
+	//fmt.Println(a)
 
-	//c := db_m8.GivePlowerPlantByVoltage(220)
-	//fmt.Println(c)
+	c := db_m8.GivePlowerPlantByVoltage(220, 0)
+	fmt.Println(c)
 }
 
 func TestBus(t *testing.T) {
@@ -82,13 +83,13 @@ func TestBus(t *testing.T) {
 	//db_m8.DeleteBusPlant(name)
 
 	//查询
-	a := db_m8.GiveByID(1, "bus")
+	a := db_m8.GiveByID(1, 0, "bus")
 	fmt.Println(a)
 
-	b := db_m8.GiveByName("bus1", "bus")
+	b := db_m8.GiveByName("bus1", 0, "bus")
 	fmt.Println(b)
 
-	c := db_m8.GiveBusByVoltage(220)
+	c := db_m8.GiveBusByVoltage(220, 0)
 	fmt.Println(c)
 }
 
@@ -139,23 +140,23 @@ func TestACLine(t *testing.T) {
 	//db_m8.DeleteACLine(name)
 
 	//查询
-	a := db_m8.GiveByID(1, "ac_line")
-	fmt.Println(a)
-
-	b := db_m8.GiveByName("ACLine1", "ac_line")
-	fmt.Println(b)
+	//a := db_m8.GiveByID(1,0, "ac_line")
+	//fmt.Println(a)
 	//
-	//c, d := db_m8.GiveACLineByBusA("bus1"), db_m8.GiveACLineByBusB("bus2")
+	//b := db_m8.GiveByName("ACLine1", 0,"ac_line")
+	//fmt.Println(b)
+	//
+	//c, d := db_m8.GiveACLineByBusA("bus1",0), db_m8.GiveACLineByBusB("bus2",0)
 	//fmt.Println(c)
 	//fmt.Println(d)
 	//
-	//e, f := db_m8.GiveACLineBySTIDA("changzhan1"), db_m8.GiveACLineBySTIDB("changzhan2")
+	//e, f := db_m8.GiveACLineBySTIDA("changzhan1",0), db_m8.GiveACLineBySTIDB("changzhan2",0)
 	//fmt.Println(e)
 	//fmt.Println(f)
 
 	//修改当前使用参数组ID
-	//new_id := 2
-	//db_m8.UpdateACLine("ACLine3", new_id)
+	new_id := 2
+	db_m8.UpdateACLine("ACLine3", new_id)
 }
 
 func TestDCLine(t *testing.T) {
@@ -195,11 +196,11 @@ func TestDCLine(t *testing.T) {
 	//db_m8.DeleteDCLine(name)
 
 	//查询
-	//a := db_m8.GiveByID(1, "dc_line")
-	//fmt.Println(a)
-	//
-	//b := db_m8.GiveByName("DCLine1", "dc_line")
-	//fmt.Println(b)
+	a := db_m8.GiveByID(1, 0, "dc_line")
+	fmt.Println(a)
+
+	b := db_m8.GiveByName("DCLine1", 0, "dc_line")
+	fmt.Println(b)
 
 	//修改参数组ID
 	//new_id := 2
@@ -239,7 +240,7 @@ func TestDCSys(t *testing.T) {
 	//db_m8.DeleteDCSystem(name)
 
 	//查询
-	a, b := db_m8.GiveByID(1, "dc_system"), db_m8.GiveByName("dcsys1", "dc_system")
+	a, b := db_m8.GiveByID(1, 0, "dc_system"), db_m8.GiveByName("dcsys1", 0, "dc_system")
 	fmt.Println(a)
 	fmt.Println(b)
 }
@@ -279,7 +280,7 @@ func TestConventor(t *testing.T) {
 	//db_m8.DeleteConventor(name)
 
 	//查询
-	a, b := db_m8.GiveByID(1, "conventor"), db_m8.GiveByName("conventor1", "conventor")
+	a, b := db_m8.GiveByID(1, 0, "conventor"), db_m8.GiveByName("conventor1", 0, "conventor")
 	fmt.Println(a)
 	fmt.Println(b)
 }
@@ -323,9 +324,9 @@ func TestTrans(t *testing.T) {
 	//db_m8.DeleteTrans(name)
 
 	//查询
-	//a, b := db_m8.GiveByID(1, "trans"), db_m8.GiveByName("trans1", "trans")
-	//fmt.Println(a)
-	//fmt.Println(b)
+	a, b := db_m8.GiveByID(1, 0, "trans"), db_m8.GiveByName("trans1", 0, "trans")
+	fmt.Println(a)
+	fmt.Println(b)
 
 	//修改参数组ID
 	new_id := 2

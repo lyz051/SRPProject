@@ -77,9 +77,16 @@ func ExistDynamicModelByMName(mname string) (bool, error) {
 }
 
 //根据ID检索动态元件
-func GetDynamicModelByID(id int) (*DynamicModel, error) {
+func GetDynamicModelByID(id int, delete int) (*DynamicModel, error) {
 	var dynamicmodel DynamicModel
-	err := models.M10.Where("id = ?", id).First(&dynamicmodel).Error
+	var err error
+	if delete == 1 || delete == 0 {
+		err = models.M10.Where("id = ? AND `delete` = ? ", id, delete).First(&dynamicmodel).Error
+	} else if delete == 2 {
+		err = models.M10.Where("id = ?", id).First(&dynamicmodel).Error
+	} else {
+		return nil, nil
+	}
 	if err != nil {
 		return nil, err
 	}
@@ -87,9 +94,16 @@ func GetDynamicModelByID(id int) (*DynamicModel, error) {
 }
 
 //根据名称检索
-func GetDynamicModelByName(name string) (*DynamicModel, error) {
+func GetDynamicModelByName(name string, delete int) (*DynamicModel, error) {
 	var dynamicmodel DynamicModel
-	err := models.M10.Where("name = ?", name).First(&dynamicmodel).Error
+	var err error
+	if delete == 1 || delete == 0 {
+		err = models.M10.Where("name = ? AND `delete` = ? ", name, delete).First(&dynamicmodel).Error
+	} else if delete == 2 {
+		err = models.M10.Where("name = ?", name).First(&dynamicmodel).Error
+	} else {
+		return nil, nil
+	}
 	if err != nil {
 		return nil, err
 	}
@@ -97,9 +111,16 @@ func GetDynamicModelByName(name string) (*DynamicModel, error) {
 }
 
 //根据英文名检索
-func GetDynamicModelByMName(mname string) (*DynamicModel, error) {
+func GetDynamicModelByMName(mname string, delete int) (*DynamicModel, error) {
 	var dynamicmodel DynamicModel
-	err := models.M10.Where("m_name = ?", mname).First(&dynamicmodel).Error
+	var err error
+	if delete == 1 || delete == 0 {
+		err = models.M10.Where("m_name = ? AND `delete` = ? ", mname, delete).First(&dynamicmodel).Error
+	} else if delete == 2 {
+		err = models.M10.Where("m_name = ?", mname).First(&dynamicmodel).Error
+	} else {
+		return nil, nil
+	}
 	if err != nil {
 		return nil, err
 	}
@@ -107,9 +128,16 @@ func GetDynamicModelByMName(mname string) (*DynamicModel, error) {
 }
 
 //根据基准电压检索
-func GetDynamicModelByKV(kv float32) ([]DynamicModel, error) {
+func GetDynamicModelByKV(kv float32, delete int) ([]DynamicModel, error) {
 	var dynamicmodel []DynamicModel
-	err := models.M10.Where("kv = ?", kv).Find(&dynamicmodel).Error
+	var err error
+	if delete == 0 || delete == 1 {
+		err = models.M10.Where("kv = ? AND `delete` = ? ", kv, delete).Find(&dynamicmodel).Error
+	} else if delete == 2 {
+		err = models.M10.Where("kv = ?", kv).Find(&dynamicmodel).Error
+	} else {
+		return nil, nil
+	}
 	if err != nil {
 		return nil, err
 	}
@@ -120,33 +148,33 @@ func GetDynamicModelByKV(kv float32) ([]DynamicModel, error) {
 	return temp, nil
 }
 
-func GiveByID(id int) map[string]interface{} {
+func GiveByID(id int, delete int) map[string]interface{} {
 	b := make(map[string]interface{})
-	a, _ := GetDynamicModelByID(id)
+	a, _ := GetDynamicModelByID(id, delete)
 	j, _ := json.Marshal(a)
 	json.Unmarshal(j, &b)
 	return b
 }
 
-func GiveByName(name string) map[string]interface{} {
+func GiveByName(name string, delete int) map[string]interface{} {
 	b := make(map[string]interface{})
-	a, _ := GetDynamicModelByName(name)
+	a, _ := GetDynamicModelByName(name, delete)
 	j, _ := json.Marshal(a)
 	json.Unmarshal(j, &b)
 	return b
 }
 
-func GiveByMName(mname string) map[string]interface{} {
+func GiveByMName(mname string, delete int) map[string]interface{} {
 	b := make(map[string]interface{})
-	a, _ := GetDynamicModelByMName(mname)
+	a, _ := GetDynamicModelByMName(mname, delete)
 	j, _ := json.Marshal(a)
 	json.Unmarshal(j, &b)
 	return b
 }
 
-func GiveByKV(kv float32) map[int]map[string]interface{} {
+func GiveByKV(kv float32, delete int) map[int]map[string]interface{} {
 	c1 := make(map[int]map[string]interface{})
-	d, _ := GetDynamicModelByKV(kv)
+	d, _ := GetDynamicModelByKV(kv, delete)
 	for i := range d {
 		var c2 map[string]interface{}
 		k, _ := json.Marshal(d[i])

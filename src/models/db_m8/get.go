@@ -2,6 +2,7 @@ package db_m8
 
 import (
 	"dbPractise/models"
+	"fmt"
 	"gorm.io/gorm"
 )
 
@@ -106,12 +107,21 @@ func ExistTransByName(name string) (bool, error) {
 	return false, nil
 }
 
+//检索部分，查找全部元素
 //power_plant检索部分
 
 //根据ID检索
-func GetPowerPlantByID(id int) (*PowerPlant, error) {
+func GetPowerPlantByID(id int, delete int) (*PowerPlant, error) {
 	var powerplant PowerPlant
-	err := models.M8.Where("id = ?", id).First(&powerplant).Error
+	var err error
+	if delete == 0 || delete == 1 {
+		err = models.M8.Where("id = ? and `delete` = ? ", id, delete).First(&powerplant).Error
+	} else if delete == 2 {
+		err = models.M8.Where("id = ?", id).First(&powerplant).Error
+	} else {
+		fmt.Println("删除标志位输入无效")
+		return nil, nil
+	}
 	if err != nil {
 		return nil, err
 	}
@@ -119,9 +129,17 @@ func GetPowerPlantByID(id int) (*PowerPlant, error) {
 }
 
 //根据英文名检索
-func GetPowerPlantByName(name string) (*PowerPlant, error) {
+func GetPowerPlantByName(name string, delete int) (*PowerPlant, error) {
 	var powerplant PowerPlant
-	err := models.M8.Where("name = ?", name).First(&powerplant).Error
+	var err error
+	if delete == 0 || delete == 1 {
+		err = models.M8.Where("name = ? and `delete` = ? ", name, delete).First(&powerplant).Error
+	} else if delete == 2 {
+		err = models.M8.Where("name = ?", name).First(&powerplant).Error
+	} else {
+		fmt.Println("删除标志位输入无效")
+		return nil, nil
+	}
 	if err != nil {
 		return nil, err
 	}
@@ -129,9 +147,16 @@ func GetPowerPlantByName(name string) (*PowerPlant, error) {
 }
 
 //根据基准电压检索
-func GetAllPowerPlantByVoltage(voltage float32) ([]PowerPlant, error) {
+func GetAllPowerPlantByVoltage(voltage float32, delete int) ([]PowerPlant, error) {
 	var powerplant []PowerPlant
-	err := models.M8.Where("voltage = ?", voltage).Find(&powerplant).Error
+	var err error
+	if delete == 1 || delete == 0 {
+		err = models.M8.Where("voltage = ? AND `delete` = ? ", voltage, delete).Find(&powerplant).Error
+	} else if delete == 2 {
+		err = models.M8.Where("voltage = ?", voltage).Find(&powerplant).Error
+	} else {
+		return nil, nil
+	}
 	if err != nil {
 		return nil, err
 	}
@@ -145,9 +170,17 @@ func GetAllPowerPlantByVoltage(voltage float32) ([]PowerPlant, error) {
 //Bus表单部分
 
 //根据ID检索
-func GetBusByID(id int) (*Bus, error) {
+func GetBusByID(id int, delete int) (*Bus, error) {
 	var bus Bus
-	err := models.M8.Where("id = ?", id).First(&bus).Error
+	var err error
+	if delete == 0 || delete == 1 {
+		err = models.M8.Where("id = ? and `delete` = ? ", id, delete).First(&bus).Error
+	} else if delete == 2 {
+		err = models.M8.Where("id = ?", id).First(&bus).Error
+	} else {
+		fmt.Println("删除标志位输入无效")
+		return nil, nil
+	}
 	if err != nil {
 		return nil, err
 	}
@@ -155,9 +188,17 @@ func GetBusByID(id int) (*Bus, error) {
 }
 
 //根据英文名检索
-func GetBusByName(name string) (*Bus, error) {
+func GetBusByName(name string, delete int) (*Bus, error) {
 	var bus Bus
-	err := models.M8.Where("name = ?", name).First(&bus).Error
+	var err error
+	if delete == 0 || delete == 1 {
+		err = models.M8.Where("name = ? and `delete` = ? ", name, delete).First(&bus).Error
+	} else if delete == 2 {
+		err = models.M8.Where("name = ?", name).First(&bus).Error
+	} else {
+		fmt.Println("删除标志位输入无效")
+		return nil, nil
+	}
 	if err != nil {
 		return nil, err
 	}
@@ -165,9 +206,16 @@ func GetBusByName(name string) (*Bus, error) {
 }
 
 //根据基准电压检索全部
-func GetAllBusByVoltage(voltage float32) ([]Bus, error) {
+func GetAllBusByVoltage(voltage float32, delete int) ([]Bus, error) {
 	var bus []Bus
-	err := models.M8.Where("voltage = ?", voltage).Find(&bus).Error
+	var err error
+	if delete == 1 || delete == 0 {
+		err = models.M8.Where("voltage = ? AND `delete` = ? ", voltage, delete).Find(&bus).Error
+	} else if delete == 2 {
+		err = models.M8.Where("voltage = ?", voltage).Find(&bus).Error
+	} else {
+		return nil, nil
+	}
 	if err != nil {
 		return nil, err
 	}
@@ -180,18 +228,34 @@ func GetAllBusByVoltage(voltage float32) ([]Bus, error) {
 
 //ACLine表单部分
 
-func GetACLineByID(id int) (*ACLine, error) {
+func GetACLineByID(id int, delete int) (*ACLine, error) {
 	var acline ACLine
-	err := models.M8.Where("id = ?", id).First(&acline).Error
+	var err error
+	if delete == 0 || delete == 1 {
+		err = models.M8.Where("id = ? and `delete` = ? ", id, delete).First(&acline).Error
+	} else if delete == 2 {
+		err = models.M8.Where("id = ?", id).First(&acline).Error
+	} else {
+		fmt.Println("删除标志位输入无效")
+		return nil, nil
+	}
 	if err != nil {
 		return nil, err
 	}
 	return &acline, nil
 }
 
-func GetACLineByName(name string) (*ACLine, error) {
+func GetACLineByName(name string, delete int) (*ACLine, error) {
 	var acline ACLine
-	err := models.M8.Where("name = ?", name).First(&acline).Error
+	var err error
+	if delete == 0 || delete == 1 {
+		err = models.M8.Where("name = ? and `delete` = ? ", name, delete).First(&acline).Error
+	} else if delete == 2 {
+		err = models.M8.Where("name = ?", name).First(&acline).Error
+	} else {
+		fmt.Println("删除标志位输入无效")
+		return nil, nil
+	}
 	if err != nil {
 		return nil, err
 	}
@@ -199,9 +263,16 @@ func GetACLineByName(name string) (*ACLine, error) {
 }
 
 //根据A端母线名检索
-func GetAllACLineByBusA(bus_a string) ([]ACLine, error) {
+func GetAllACLineByBusA(bus_a string, delete int) ([]ACLine, error) {
 	var acline []ACLine
-	err := models.M8.Where("bus_a = ?", bus_a).Find(&acline).Error
+	var err error
+	if delete == 1 || delete == 0 {
+		err = models.M8.Where("bus_a = ? AND `delete` = ? ", bus_a, delete).Find(&acline).Error
+	} else if delete == 2 {
+		err = models.M8.Where("bus_a = ?", bus_a).Find(&acline).Error
+	} else {
+		return nil, nil
+	}
 	if err != nil {
 		return nil, err
 	}
@@ -213,9 +284,19 @@ func GetAllACLineByBusA(bus_a string) ([]ACLine, error) {
 }
 
 //根据B端母线名检索
-func GetAllACLineByBusB(bus_b string) ([]ACLine, error) {
+func GetAllACLineByBusB(bus_b string, delete int) ([]ACLine, error) {
 	var acline []ACLine
-	err := models.M8.Where("bus_b = ?", bus_b).Find(&acline).Error
+	var err error
+	if delete == 1 || delete == 0 {
+		err = models.M8.Where("bus_a = ? AND `delete` = ? ", bus_b, delete).Find(&acline).Error
+	} else if delete == 2 {
+		err = models.M8.Where("bus_a = ?", bus_b).Find(&acline).Error
+	} else {
+		return nil, nil
+	}
+	if err != nil {
+		return nil, err
+	}
 	if err != nil {
 		return nil, err
 	}
@@ -227,9 +308,16 @@ func GetAllACLineByBusB(bus_b string) ([]ACLine, error) {
 }
 
 //根据A端厂站名检索
-func GetAllACLineSTIDA(stid_a string) ([]ACLine, error) {
+func GetAllACLineSTIDA(stid_a string, delete int) ([]ACLine, error) {
 	var acline []ACLine
-	err := models.M8.Where("stid_a = ?", stid_a).Find(&acline).Error
+	var err error
+	if delete == 1 || delete == 0 {
+		err = models.M8.Where("stid_a = ? AND `delete` = ? ", stid_a, delete).Find(&acline).Error
+	} else if delete == 2 {
+		err = models.M8.Where("stid_a = ?", stid_a).Find(&acline).Error
+	} else {
+		return nil, nil
+	}
 	if err != nil {
 		return nil, err
 	}
@@ -241,9 +329,16 @@ func GetAllACLineSTIDA(stid_a string) ([]ACLine, error) {
 }
 
 //根据B端厂站名检索
-func GetAllACLineSTIDB(stid_b string) ([]ACLine, error) {
+func GetAllACLineSTIDB(stid_b string, delete int) ([]ACLine, error) {
 	var acline []ACLine
-	err := models.M8.Where("stid_b = ?", stid_b).Find(&acline).Error
+	var err error
+	if delete == 1 || delete == 0 {
+		err = models.M8.Where("stid_a = ? AND `delete` = ? ", stid_b, delete).Find(&acline).Error
+	} else if delete == 2 {
+		err = models.M8.Where("stid_a = ?", stid_b).Find(&acline).Error
+	} else {
+		return nil, nil
+	}
 	if err != nil {
 		return nil, err
 	}
@@ -256,17 +351,33 @@ func GetAllACLineSTIDB(stid_b string) ([]ACLine, error) {
 
 //DCLine表单部分
 
-func GetDCLineByID(id int) (*DCLine, error) {
+func GetDCLineByID(id int, delete int) (*DCLine, error) {
 	var dcline DCLine
-	err := models.M8.Where("id = ?", id).First(&dcline).Error
+	var err error
+	if delete == 0 || delete == 1 {
+		err = models.M8.Where("id = ? and `delete` = ? ", id, delete).First(&dcline).Error
+	} else if delete == 2 {
+		err = models.M8.Where("id = ?", id).First(&dcline).Error
+	} else {
+		fmt.Println("删除标志位输入无效")
+		return nil, nil
+	}
 	if err != nil {
 		return nil, err
 	}
 	return &dcline, nil
 }
-func GetDCLineByName(name string) (*DCLine, error) {
+func GetDCLineByName(name string, delete int) (*DCLine, error) {
 	var dcline DCLine
-	err := models.M8.Where("name = ?", name).First(&dcline).Error
+	var err error
+	if delete == 0 || delete == 1 {
+		err = models.M8.Where("name = ? and `delete` = ? ", name, delete).First(&dcline).Error
+	} else if delete == 2 {
+		err = models.M8.Where("name = ?", name).First(&dcline).Error
+	} else {
+		fmt.Println("删除标志位输入无效")
+		return nil, nil
+	}
 	if err != nil {
 		return nil, err
 	}
@@ -275,17 +386,33 @@ func GetDCLineByName(name string) (*DCLine, error) {
 
 //DCSystem表单部分
 
-func GetDCSysByID(id int) (*DCSystem, error) {
+func GetDCSysByID(id int, delete int) (*DCSystem, error) {
 	var dcsys DCSystem
-	err := models.M8.Where("id = ?", id).First(&dcsys).Error
+	var err error
+	if delete == 0 || delete == 1 {
+		err = models.M8.Where("id = ? and `delete` = ? ", id, delete).First(&dcsys).Error
+	} else if delete == 2 {
+		err = models.M8.Where("id = ?", id).First(&dcsys).Error
+	} else {
+		fmt.Println("删除标志位输入无效")
+		return nil, nil
+	}
 	if err != nil {
 		return nil, err
 	}
 	return &dcsys, nil
 }
-func GetDCSysByName(name string) (*DCSystem, error) {
+func GetDCSysByName(name string, delete int) (*DCSystem, error) {
 	var dcsys DCSystem
-	err := models.M8.Where("name = ?", name).First(&dcsys).Error
+	var err error
+	if delete == 0 || delete == 1 {
+		err = models.M8.Where("name = ? and `delete` = ? ", name, delete).First(&dcsys).Error
+	} else if delete == 2 {
+		err = models.M8.Where("name = ?", name).First(&dcsys).Error
+	} else {
+		fmt.Println("删除标志位输入无效")
+		return nil, nil
+	}
 	if err != nil {
 		return nil, err
 	}
@@ -294,17 +421,33 @@ func GetDCSysByName(name string) (*DCSystem, error) {
 
 //Conventor表单部分
 
-func GetConventorByID(id int) (*Conventor, error) {
+func GetConventorByID(id int, delete int) (*Conventor, error) {
 	var conventor Conventor
-	err := models.M8.Where("id = ?", id).First(&conventor).Error
+	var err error
+	if delete == 0 || delete == 1 {
+		err = models.M8.Where("id = ? and `delete` = ? ", id, delete).First(&conventor).Error
+	} else if delete == 2 {
+		err = models.M8.Where("id = ?", id).First(&conventor).Error
+	} else {
+		fmt.Println("删除标志位输入无效")
+		return nil, nil
+	}
 	if err != nil {
 		return nil, err
 	}
 	return &conventor, nil
 }
-func GetConventorByName(name string) (*Conventor, error) {
+func GetConventorByName(name string, delete int) (*Conventor, error) {
 	var conventor Conventor
-	err := models.M8.Where("name = ?", name).First(&conventor).Error
+	var err error
+	if delete == 0 || delete == 1 {
+		err = models.M8.Where("name = ? and `delete` = ? ", name, delete).First(&conventor).Error
+	} else if delete == 2 {
+		err = models.M8.Where("name = ?", name).First(&conventor).Error
+	} else {
+		fmt.Println("删除标志位输入无效")
+		return nil, nil
+	}
 	if err != nil {
 		return nil, err
 	}
@@ -313,17 +456,33 @@ func GetConventorByName(name string) (*Conventor, error) {
 
 //Trans表单部分
 
-func GetTransByID(id int) (*Trans, error) {
+func GetTransByID(id int, delete int) (*Trans, error) {
 	var trans Trans
-	err := models.M8.Where("id = ?", id).First(&trans).Error
+	var err error
+	if delete == 0 || delete == 1 {
+		err = models.M8.Where("id = ? and `delete` = ? ", id, delete).First(trans).Error
+	} else if delete == 2 {
+		err = models.M8.Where("id = ?", id).First(trans).Error
+	} else {
+		fmt.Println("删除标志位输入无效")
+		return nil, nil
+	}
 	if err != nil {
 		return nil, err
 	}
 	return &trans, nil
 }
-func GetTransByName(name string) (*Trans, error) {
+func GetTransByName(name string, delete int) (*Trans, error) {
 	var trans Trans
-	err := models.M8.Where("name = ?", name).First(&trans).Error
+	var err error
+	if delete == 0 || delete == 1 {
+		err = models.M8.Where("name = ? and `delete` = ? ", name, delete).First(&trans).Error
+	} else if delete == 2 {
+		err = models.M8.Where("name = ?", name).First(&trans).Error
+	} else {
+		fmt.Println("删除标志位输入无效")
+		return nil, nil
+	}
 	if err != nil {
 		return nil, err
 	}

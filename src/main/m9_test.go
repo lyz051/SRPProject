@@ -66,7 +66,7 @@ func TestM9(t *testing.T) {
 	trans.AddUser = "lzt"
 	dcb.LineName = "testLine"
 	cvt.AddUser = "lzt"
-	cvt.QDLEDZ = 2
+	cvt.QDLEDZ = 9
 	cvt.TransName = "testTrans"
 
 	// Add
@@ -79,7 +79,7 @@ func TestM9(t *testing.T) {
 	//acb.ID=6
 	//trans.ID=2
 	//data1:=map[string]interface{}{
-	//	"ParallelNum":   1,
+	//	"ParallelNum":   9,
 	//}
 	//data2:=map[string]interface{}{
 	//	"Tg":            1.,
@@ -105,7 +105,7 @@ func TestM9(t *testing.T) {
 	//}
 
 	//Delete
-	//acb.ID = 7
+	//acb.ID = 10
 	////db_m9.Delete(acb)
 	//db_m9.DeleteACBranchByID(acb.ID)
 

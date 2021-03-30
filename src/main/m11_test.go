@@ -65,6 +65,6 @@ func TestGeneratorParameter(t *testing.T) {
 	//db_m11.DeleteGeneratorParemeterByID(id)
 
 	//查找
-	a := db_m11.GiveByGName("dynamicmodel1")
+	a := db_m11.GiveByGName("dynamicmodel1", 0)
 	fmt.Println(a)
 }
